@@ -1,6 +1,7 @@
 import tools
 
 def main():
+    
     # bring course terms in list
     terms = tools.get_terms(2)
     courseLists = []
