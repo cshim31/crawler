@@ -3,7 +3,7 @@ import json
 from bs4 import BeautifulSoup
 import re
 class Course:
-    def __init__(self, term, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, level, credit):
+    def __init__(self, term='', courseTitle='', courseCRN='', courseID='', sectionID='', type='', time='', days='', location='', instructor='', level='', credit=''):
         self.term = term
         self.courseTitle = courseTitle
         self.courseCRN = courseCRN
@@ -56,7 +56,7 @@ class Course:
 
     # string format
     def __str__(self):
-        return self.getTerm() + ',' + self.getCourseTitle() + ',' + self.getCourseCRN() + ',' + self.getCourseID()  + ',' + self.getSectionID() + ',' + self.getType() + ',' + self.getTime()  + ',' + self.getDays  + ',' + self.getLocation  + ',' + self.getInstructor  + ',' + self.getLevel()  + ',' + self.getCredit() + '\r\n'
+        return self.getTerm() + ',' + self.getCourseTitle() + ',' + self.getCourseCRN() + ',' + self.getCourseID()  + ',' + self.getSectionID() + ',' + self.getType() + ',' + self.getTime()  + ',' + self.getDays()  + ',' + self.getLocation()  + ',' + self.getInstructor()  + ',' + self.getLevel()  + ',' + self.getCredit() + '\r\n'
 
 
 # @param number of course terms to be extracted
@@ -192,26 +192,32 @@ def get_course_info(course_term, course_subject, course_num):
         level = body.find(text=re.compile('Levels')).strip()
         credit = body.find(text=re.compile('Credits')).strip()
         bodyInfo = body.find_all('td')
-        type = bodyInfo[0].text.strip()
-        time = bodyInfo[1].text.strip()
-        days = bodyInfo[2].text.strip()
-        location = bodyInfo[3].text.strip()
-        instructor = bodyInfo[6].text.strip()
+        print(title)
+        if bodyInfo:
+            type = bodyInfo[0].text.strip()
+            time = bodyInfo[1].text.strip()
+            days = bodyInfo[2].text.strip()
+            location = bodyInfo[3].text.strip()
+            instructor = bodyInfo[6].text.strip()
 
-        # Instantiate each course and append to course list
-        courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, level, credit))
+            # Instantiate each course and append to course list
+            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, level, credit))
+
+        else:
+            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, level=level, credit=credit))
+
     return courseList
 
 
 # write html text to index.html for debug
-# @param string html text
+# :param string html text
 def debug_writeToHTML(html):
     f = open("data/index.html", 'w', encoding='UTF-8')
     f.write(html)
     f.close()
 
 # output parsed data to excel file
-# @param list of Course object
+# :param list of Course object
 def writeToExcel(courseList):
     f = open("data/" + courseList[0].getTerm() + '.txt', 'w', encoding='UTF-8')
     
