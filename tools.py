@@ -3,7 +3,7 @@ import json
 from bs4 import BeautifulSoup
 import re
 class Course:
-    def __init__(self, term='', courseTitle='', courseCRN='', courseID='', sectionID='', type='', time='', days='', location='', instructor='', level='', credit=''):
+    def __init__(self, term='', courseTitle='', courseCRN='', courseID='', sectionID='', type='', time='', days='', location='', instructor='', subject = '', level='', credit=''):
         self.term = term
         self.courseTitle = courseTitle
         self.courseCRN = courseCRN
@@ -14,6 +14,7 @@ class Course:
         self.days = days
         self.location = location
         self.instructor = instructor
+        self.subject = subject
         self.level = level
         self.credit = credit
 
@@ -48,6 +49,9 @@ class Course:
     def getInstructor(self):
         return self.instructor
 
+    def getSubject(self):
+        return self.subject
+
     def getLevel(self):
         return self.level
     
@@ -56,7 +60,7 @@ class Course:
 
     # string format
     def __str__(self):
-        return self.getTerm() + ',' + self.getCourseTitle() + ',' + self.getCourseCRN() + ',' + self.getCourseID()  + ',' + self.getSectionID() + ',' + self.getType() + ',' + self.getTime()  + ',' + self.getDays()  + ',' + self.getLocation()  + ',' + self.getInstructor()  + ',' + self.getLevel()  + ',' + self.getCredit() + '\r\n'
+        return self.getTerm() + ',' + self.getSubject() + ',' + self.getCourseTitle() + ',' + self.getCourseCRN() + ',' + self.getCourseID()  + ',' + self.getSectionID() + ',' + self.getType() + ',' + self.getTime()  + ',' + self.getDays()  + ',' + self.getLocation()  + ',' + self.getInstructor()  + ',' + self.getLevel()  + ',' + self.getCredit() + '\r\n'
 
 
 # @param number of course terms to be extracted
@@ -88,6 +92,7 @@ def get_terms(num):
 
 
 def get_subjects(course_term):
+    courseIDs = []
     course_subjects = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_cat_term_date'
     
@@ -104,16 +109,18 @@ def get_subjects(course_term):
 
     # Iterate the list of terms and append to list
     for list in lists:
-        subj = list['value']
-        course_subjects.append(subj)
+        courseID = list['value']
+        course_subject = list.text
+        courseIDs.append(courseID)
+        course_subjects.append(course_subject)
 
-    print('Found ', len(course_subjects), ' course subjects')       
-    return course_subjects
+    print(course_term, ': Found ', len(course_subjects), ' course subjects')       
+    return courseIDs, course_subjects
 
-# @param one single subject per each call
-def get_courseNum(course_term, course_subject):
+# :param one single subject per each call
+def get_courseNum(course_term, cours_IDs):
     course_nums = []
-    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses?term_in='+course_term+'&call_proc_in=bwckctlg.p_disp_dyn_ctlg&sel_subj=dummy&sel_levl=dummy&sel_schd=dummy&sel_coll=dummy&sel_divs=dummy&sel_dept=dummy&sel_attr=dummy&sel_subj='+course_subject+'&sel_crse_strt=&sel_crse_end=&sel_title=&sel_levl=%&sel_schd:%&sel_coll:%&sel_divs:%&sel_dept:%&sel_from_cred:&sel_to_cred:&sel_attr:%'
+    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses?term_in='+course_term+'&call_proc_in=bwckctlg.p_disp_dyn_ctlg&sel_subj=dummy&sel_levl=dummy&sel_schd=dummy&sel_coll=dummy&sel_divs=dummy&sel_dept=dummy&sel_attr=dummy&sel_subj='+cours_IDs+'&sel_crse_strt=&sel_crse_end=&sel_title=&sel_levl=%&sel_schd:%&sel_coll:%&sel_divs:%&sel_dept:%&sel_from_cred:&sel_to_cred:&sel_attr:%'
     '''
     # facing error during post
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses'
@@ -153,26 +160,34 @@ def get_courseNum(course_term, course_subject):
         courseNum = title.split(' ')[1]
         course_nums.append(courseNum)
 
-    print('Found ', len(course_nums), ' course numbers')       
+    print(cours_IDs, ': Found ', len(course_nums), ' course numbers')       
     return course_nums
 
 
-def get_course_info(course_term, course_subject, course_num):
+def get_course_info(course_term, course_subject, course_ID, course_num):
+    print(course_term, ' : ', course_subject, ' : ', course_ID, ' : ', course_num)
     courseList = []
-    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse' 
+    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse?term_in='+course_term+'&subj_in='+course_ID+'&crse_in='+course_num+'&schd_in=%' 
+    '''
     data = {
         'term_in' : course_term,
-        'subj_in' : course_subject,
+        'subj_in' : course_ID,
         'crse_in' : course_num,
         'schd_in' : '%'
     }
-
-    response = requests.post(URL, data)
+'''
+    response = requests.get(URL)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
     # bring course list to lists 
     data = soup.find('table', class_='datadisplaytable')
+
+    # check if course schedule exists or not
+    if(not data.find('th', class_='ddtitle')):
+        print("ERROR::Schedule not found")
+        return
+
     lists = str(data).split('<th class="ddtitle" scope="colgroup">')[1:]
     # Iterate the list of terms and append to list
     for list in lists:
@@ -182,17 +197,17 @@ def get_course_info(course_term, course_subject, course_num):
         titleStr = soup.find('a').text
         title = titleStr.split('-')
         term = course_term.strip()
-        courseTitle = title[0].strip()
-        courseCRN = title[1].strip()
-        courseID = title[2].strip()
-        sectionID = title[3].strip()
-
+        subject = course_subject.strip()
+        courseTitle = ''.join(title[:-3]).strip()  
+        courseCRN = title[-3].strip()
+        courseID = title[-2].strip()
+        sectionID = title[-1].strip()
+        print(title)
         # course body info
         body = soup.find('td', class_='dddefault')
         level = body.find(text=re.compile('Levels')).strip()
         credit = body.find(text=re.compile('Credits')).strip()
         bodyInfo = body.find_all('td')
-        print(title)
         if bodyInfo:
             type = bodyInfo[0].text.strip()
             time = bodyInfo[1].text.strip()
@@ -201,7 +216,7 @@ def get_course_info(course_term, course_subject, course_num):
             instructor = bodyInfo[6].text.strip()
 
             # Instantiate each course and append to course list
-            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, level, credit))
+            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, subject, level, credit))
 
         else:
             courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, level=level, credit=credit))
