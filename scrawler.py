@@ -1,28 +1,42 @@
 import tools
+import time
+from time import gmtime, strftime
 
 def main():
-    
+    start_time = time.time()
+    formatted_stime = gmtime()
+
     # bring course terms in list
-    terms = tools.get_terms(2)
-    courseLists = []
+    terms = tools.get_terms(1)
+    courseLists = [[]]
     # extraction continues for each course term
     for term in terms: 
-        subjects = tools.get_subjects(term)
+        courseIDs, subjects = tools.get_subjects(term)
         courseList = []
-        for subject in subjects:
+        for i in range(len(subjects)):
             # bring course numbers for each subject
-            nums = tools.get_courseNum(term, subject)
+            nums = tools.get_courseNum(term, courseIDs[i])
             
             for num in nums:
                 # extract course information for each course term 
-                courseList = tools.get_course_info(term, subject, num)
-        # append course information for each term to list
-        courseLists.append(courseList)
+                courseList = tools.get_course_info(term, subjects[i], courseIDs[i], num)
+                if courseList is not None:
+                    # append course information for each term to list
+                    courseLists.append(courseList)
 
     
     # write parsed data to file output in excel
+    print("Writing to excel")
     for courseList in courseLists:
         tools.writeToExcel(courseList)
 
+    # time taken report
+    end_time = time.time()
+    formatted_etime = gmtime()
+
+    strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_stime)
+    strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_etime)
+    print("--- %s seconds ---" % (end_time - start_time))
+    
 if __name__ == "__main__":
     main()
