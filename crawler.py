@@ -1,13 +1,13 @@
 import tools
 import time
 from time import gmtime, strftime
-
+import constant
 def main():
     start_time = time.time()
     formatted_stime = gmtime()
 
-    # bring course terms in list
-    terms = tools.get_terms(1)
+    # bring one most recent course term into list
+    terms = tools.get_terms(constant.DEFAULT)
     courseLists = [[]]
     # extraction continues for each course term
     for term in terms: 
@@ -25,18 +25,17 @@ def main():
                     courseLists.append(courseList)
 
     
-    # write parsed data to file output in excel
-    print("Writing to excel")
-    for courseList in courseLists:
-        tools.writeToExcel(courseList)
+        # write parsed data to file output in excel
+        print("Writing to excel")
+        for courseList in courseLists:
+            tools.writeToExcel(courseList, term)
 
     # time taken report
     end_time = time.time()
     formatted_etime = gmtime()
 
-    strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_stime)
-    strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_etime)
+    print(strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_stime))
+    print(strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_etime))
     print("--- %s seconds ---" % (end_time - start_time))
-    
 if __name__ == "__main__":
     main()
