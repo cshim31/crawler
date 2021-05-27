@@ -3,7 +3,7 @@ import json
 from bs4 import BeautifulSoup
 import re
 class Course:
-    def __init__(self, term='', courseTitle='', courseCRN='', courseID='', sectionID='', type='', time='', days='', location='', instructor='', subject = '', level='', credit=''):
+    def __init__(self, term='', courseTitle='', courseCRN='', courseID='', sectionID='', type='', time='', days='', location='', instructor='', subject='', level='', credit='', attribute=''):
         self.term = term
         self.courseTitle = courseTitle
         self.courseCRN = courseCRN
@@ -17,6 +17,7 @@ class Course:
         self.subject = subject
         self.level = level
         self.credit = credit
+        self.attribute = attribute
 
     # getters & setters
     def getTerm(self):
@@ -58,12 +59,17 @@ class Course:
     def getCredit(self):
         return self.credit
 
+    def getAttribute(self):
+        return self.attribute
+
     # string format
     def __str__(self):
-        return self.getTerm() + ',' + self.getSubject() + ',' + self.getCourseTitle() + ',' + self.getCourseCRN() + ',' + self.getCourseID()  + ',' + self.getSectionID() + ',' + self.getType() + ',' + self.getTime()  + ',' + self.getDays()  + ',' + self.getLocation()  + ',' + self.getInstructor()  + ',' + self.getLevel()  + ',' + self.getCredit() + '\r\n'
+        return self.getTerm() + ',' + self.getSubject() + ',' + self.getCourseTitle() + ',' + self.getCourseCRN() + ',' + self.getCourseID()  + ',' + self.getSectionID() + ',' + self.getType() + ',' + self.getTime()  + ',' + self.getDays()  + ',' + self.getLocation()  + ',' + self.getInstructor()  + ',' + self.getLevel()  + ',' + self.getCredit() + ',' + self.getAttribute() + '\r\n'
 
-
-# @param number of course terms to be extracted
+# crawl the list of course terms with specified num input
+# return most recent $(num) course terms
+# :param number of course terms to be extracted
+# :return list of course terms
 def get_terms(num): 
     course_terms = []
     URL = 'https://oscar.gatech.edu/pls/bprod/bwckctlg.p_disp_dyn_ctlg'
@@ -91,6 +97,10 @@ def get_terms(num):
     return course_terms
 
 
+# crawl the list of course ID and subjects with specified course term input
+# :param course term to extract course subjects available
+# :return list of course ID with specified course term
+# :return list of course subject
 def get_subjects(course_term):
     courseIDs = []
     course_subjects = []
@@ -117,7 +127,11 @@ def get_subjects(course_term):
     print(course_term, ': Found ', len(course_subjects), ' course subjects')       
     return courseIDs, course_subjects
 
-# :param one single subject per each call
+
+# crawl the list of course number associated with specified course term and course ID input
+# :param course term to extract course subjects available
+# :param course ID to extract course number
+# :return list of course number 
 def get_courseNum(course_term, cours_IDs):
     course_nums = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses?term_in='+course_term+'&call_proc_in=bwckctlg.p_disp_dyn_ctlg&sel_subj=dummy&sel_levl=dummy&sel_schd=dummy&sel_coll=dummy&sel_divs=dummy&sel_dept=dummy&sel_attr=dummy&sel_subj='+cours_IDs+'&sel_crse_strt=&sel_crse_end=&sel_title=&sel_levl=%&sel_schd:%&sel_coll:%&sel_divs:%&sel_dept:%&sel_from_cred:&sel_to_cred:&sel_attr:%'
@@ -164,8 +178,13 @@ def get_courseNum(course_term, cours_IDs):
     return course_nums
 
 
+# crawl the list of course information associated with specified course term, course subject, course ID, and course number input
+# :param course term
+# :param course subject 
+# :param course ID 
+# :param course number with 
+# :return list of course object 
 def get_course_info(course_term, course_subject, course_ID, course_num):
-    print(course_term, ' : ', course_subject, ' : ', course_ID, ' : ', course_num)
     courseList = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse?term_in='+course_term+'&subj_in='+course_ID+'&crse_in='+course_num+'&schd_in=%' 
     '''
@@ -185,7 +204,6 @@ def get_course_info(course_term, course_subject, course_ID, course_num):
 
     # check if course schedule exists or not
     if(not data.find('th', class_='ddtitle')):
-        print("ERROR::Schedule not found")
         return
 
     lists = str(data).split('<th class="ddtitle" scope="colgroup">')[1:]
@@ -193,7 +211,7 @@ def get_course_info(course_term, course_subject, course_ID, course_num):
     for list in lists:
         # reinstantiate soup object for course info body
         soup = BeautifulSoup(list, 'html.parser')
-        # course header info
+        # course header section
         titleStr = soup.find('a').text
         title = titleStr.split('-')
         term = course_term.strip()
@@ -202,12 +220,18 @@ def get_course_info(course_term, course_subject, course_ID, course_num):
         courseCRN = title[-3].strip()
         courseID = title[-2].strip()
         sectionID = title[-1].strip()
-        print(title)
-        # course body info
+        # course body section
         body = soup.find('td', class_='dddefault')
-        level = body.find(text=re.compile('Levels')).strip()
+        level = re.sub('[:\s+]', '', body.find('span', text=re.compile('Levels:')).next_sibling)
+        level = level.replace(',', ' ')
         credit = body.find(text=re.compile('Credits')).strip()
         bodyInfo = body.find_all('td')
+        # crawl sections if they are present
+        attribute = ''
+        if body.find('span', text=re.compile('Attributes:')) is not None :
+            attribute = re.sub('[:\s+]', '', body.find('span', text=re.compile('Attributes:')).next_sibling)
+
+        # crawl schedule data if schedule is present
         if bodyInfo:
             type = bodyInfo[0].text.strip()
             time = bodyInfo[1].text.strip()
@@ -216,25 +240,31 @@ def get_course_info(course_term, course_subject, course_ID, course_num):
             instructor = bodyInfo[6].text.strip()
 
             # Instantiate each course and append to course list
-            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, subject, level, credit))
+            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, subject, level, credit, attribute))
 
         else:
-            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, level=level, credit=credit))
+            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, level=level, credit=credit, attribute = attribute))
 
     return courseList
 
 
-# write html text to index.html for debug
+# write html text to index.html for debug purpose
 # :param string html text
 def debug_writeToHTML(html):
     f = open("data/index.html", 'w', encoding='UTF-8')
     f.write(html)
     f.close()
 
-# output parsed data to excel file
+#  append output parsed data to source
 # :param list of Course object
-def writeToExcel(courseList):
-    f = open("data/" + courseList[0].getTerm() + '.txt', 'w', encoding='UTF-8')
+# :param course term
+def writeToExcel(courseList, term):
+    if courseList is None:
+        return
+
+    f = open("data/" + term + '.csv', 'a', encoding='UTF-8')
+    # in case of error, try one on below and save output as .csv manually
+    # f = open("data/" + term + '.txt', 'a', encoding='UTF-8')
     
     for course in courseList:
         f.write(str(course))

@@ -1,0 +1,4 @@
+# git ignores extensions
+data/*.txt
+data/*.csv
+.lnk
