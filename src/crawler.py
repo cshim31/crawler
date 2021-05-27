@@ -1,7 +1,10 @@
-import tools
 import time
 from time import gmtime, strftime
+
+import tools
 import constant
+
+
 def main():
     start_time = time.time()
     formatted_stime = gmtime()
