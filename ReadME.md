@@ -1,10 +1,45 @@
 # GT Crawler
-GT crawler is an application for crawling course information in Georgia Tech 
-## Installation
-clone the repository and use package manager pip to install libraries
 
-```bash
-git clone https://github.com/GT-Time/crawler.git
-pip install beautifulsoup4
-pip install regex
-```
+<p/> Georgia Tech course information crawler using Python
+
+### Description
+
+<a href="https://www.telerik.com/download/fiddler-everywhere"> Fiddler Everywhere </a> is used for analyzing packet sent to Georgia Tech web server.
+<p /> Data is saved in form of ".csv" extension but feel free to edit the extension and change it on your own.
+
+## Getting Started
+### Building and installing
+#### Prereqs:
+- A Python compiler (Python 3.9.5+)
+- A [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) v4.9.0+ to enable support for parsing HTML
+- A [Regular Expression](https://docs.python.org/3/howto/regex.html) v3.9.7+ to enable support for searching pattern
+
+<p> After downloading a source, Clone the repository.</p>
+    
+    git clone https://github.com/GT-Time/crawler.git
+    
+<p> Navigate to repository and run </p>    
+
+    python crawler.py
+
+## Usage
+<p> Navigate to constant.py and change setting. </p>
+
+[![Constant.py](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/cshim31/crawler/blob/master/src/constant.py)
+
+### Set number of semester 
+<p> Navigate to constant.py and change DEFAULT value. </p>
+<p> Value represents recent number of semester to crawl data. </p>
+
+### Change Timeout and Delay 
+<p> Navigate to constant.py and change TIMEOUT and DELAY value. </p>
+
+
+## Output
+
+parsed data will be saved as "data/term.txt". User will need to manually convert it to csv file by using excel. </p>
+* Open Microsoft Excel
+* Go to Data -> From Text/CSV
+* Navigate to parsed data text file
+* Set delimiter as '|'
+* Complete import

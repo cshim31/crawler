@@ -1,7 +1,9 @@
-import tools
 import time
 from time import gmtime, strftime
+
+import tools
 import constant
+
 def main():
     start_time = time.time()
     formatted_stime = gmtime()
@@ -23,12 +25,13 @@ def main():
                 if courseList is not None:
                     # append course information for each term to list
                     courseLists.append(courseList)
+                time.sleep(constant.DELAY)
 
     
         # write parsed data to file output in excel
         print("Writing to excel")
         for courseList in courseLists:
-            tools.writeToExcel(courseList, term)
+            tools.writeToText(courseList, term)
 
     # time taken report
     end_time = time.time()

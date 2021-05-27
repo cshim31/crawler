@@ -1,4 +1,6 @@
 # git ignores extensions
 data/*.txt
 data/*.csv
-.lnk
+data/*.xlsx
+*.lnk 
+**/__pycache__/  
