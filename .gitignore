@@ -2,3 +2,4 @@
 data/*.txt
 data/*.csv
 *.lnk 
+**/__pycache__/  
