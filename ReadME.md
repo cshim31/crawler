@@ -19,3 +19,11 @@ pip install beautifulsoup4
 pip install regex
 ```
 
+## Output
+
+parsed data will be saved as "data/term.txt". User will need to manually convert it to csv file by using excel. </p>
+* Open Microsoft Excel
+* Go to Data -> From Text/CSV
+* Navigate to parsed data text file
+* Set delimiter as '|'
+* Complete import
