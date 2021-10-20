@@ -2,7 +2,7 @@ name: Build and Deploy
 on: 
   push:
     branches:
-      - main
+      - master
 
   schedule:
     - cron: '0 0-23 * * *' # run every hour
@@ -19,7 +19,7 @@ jobs:
       
 
       - name: Crawling
-        run: 
+        run: python3 src/crawler.py
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
