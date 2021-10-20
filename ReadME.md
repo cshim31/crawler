@@ -11,12 +11,16 @@
 ### Building and installing
 #### Prereqs:
 - A Python compiler (Python 3.9.5+)
-- A [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) v4.9.0+ to enable support for parsing HTML
-- A [Regular Expression](https://docs.python.org/3/howto/regex.html) v3.9.7+ to enable support for searching pattern
+- A Package management system (pip 20.0.2+)
 
-<p> After downloading a source, Clone the repository.</p>
+<p> Clone the repository</p>
     
     git clone https://github.com/GT-Time/crawler.git
+    
+<p> Install requirements and build project </p>
+
+    pip install -r requirements.txt
+    
     
 <p> Navigate to repository and run </p>    
 
