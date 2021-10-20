@@ -8,22 +8,19 @@ def main():
     start_time = time.time()
     formatted_stime = gmtime()
 
-    # bring one most recent course term into list
+    # fetch number of semester as defined in constant.py
     terms = tools.get_terms(constant.DEFAULT)
     courseLists = [[]]
-    # extraction continues for each course term
+    # fetch course information for each course term
     for term in terms: 
         courseIDs, subjects = tools.get_subjects(term)
         courseList = []
         for i in range(len(subjects)):
-            # bring course numbers for each subject
             nums = tools.get_courseNum(term, courseIDs[i])
             
             for num in nums:
-                # extract course information for each course term 
                 courseList = tools.get_course_info(term, subjects[i], courseIDs[i], num)
                 if courseList is not None:
-                    # append course information for each term to list
                     courseLists.append(courseList)
                 time.sleep(constant.DELAY)
 
