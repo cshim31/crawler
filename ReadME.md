@@ -32,8 +32,8 @@
 [![Constant.py](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/cshim31/crawler/blob/master/src/constant.py)
 
 ### Set number of semester 
-<p> Navigate to constant.py and change DEFAULT value. </p>
-<p> Value represents recent number of semester to crawl data. </p>
+<p> Navigate to constant.py and change SEMESTER value. </p>
+<p> Value represents recent number of recent semester to crawl data. </p>
 
 ### Change Timeout and Delay 
 <p> Navigate to constant.py and change TIMEOUT and DELAY value. </p>
