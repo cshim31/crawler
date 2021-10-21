@@ -230,7 +230,7 @@ def writeToText(courseList, term):
         return
 
     #f = open("../data/" + term + '.txt', 'a+', encoding='UTF-8')
-    f = open(term+'.txt','a',encoding='UTF-8')
+    f = open('./data/'+term+'.txt','w',encoding='UTF-8')
     for course in courseList:
         f.write(str(course))
     
