@@ -1,11 +1,11 @@
-name: Build and Deploy
+name: Fetch
 on: 
   push:
     branches:
       - master
 
   schedule:
-    - cron: '0 8 * * *' # run every hour
+    - cron: '0 * * * *' # run on every hour
 
 jobs:
   build-and-deploy:
@@ -24,5 +24,5 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          branch: gh-pages # The branch the action should deploy to.
+          branch: data # The branch the action should deploy to.
           folder: data # The folder the action should deploy.
