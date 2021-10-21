@@ -21,16 +21,16 @@ def run():
     # run until thread completes
     running = True
     while running:
+        sleep(10) # check every 10s
         # reset system variables
         running = True
-        isNotTerminated = True
+        isAlive = True
         if threadList:
-            isNotTerminated = threadList[0].is_alive()            
+            isAlive = threadList[0].is_alive()            
         for thread in threadList:
-            isNotTerminated = isNotTerminated and thread.is_alive()
+            isAlive = not (isAlive or thread.is_alive())
 
-        running = running != isNotTerminated # xor
-        sleep(10) # check every 10s
+        running = running != isAlive # xor
 
     # time report
     end_time = time()
