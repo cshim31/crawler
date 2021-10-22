@@ -16,6 +16,9 @@ def task(term):
 
     
     # write parsed data to file output in excel
-    print("Writing to excel")
-    for courseList in courseLists:
-        tools.writeToText(courseList, term)
+    print("Writing data...")
+    tools.writeToText(courseLists, term)
+    tools.writeToJson(courseLists, term)
+    #tools.writeToCsv(courseList, term)
+    
+    tools.convertToCsv(term)

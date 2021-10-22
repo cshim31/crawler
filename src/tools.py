@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import re
 import constant
 import csv
+import pandas as pd
+import json
+
 class Course:
     def __init__(self, term='', courseTitle='', courseCRN='', courseID='', sectionID='', type='', time='', days='', location='', instructor='', subject='', level='', credit='', attribute=''):
         self.term = term
@@ -215,24 +218,82 @@ def get_course_info(course_term, course_subject, course_ID, course_num):
     return courseList
 
 
-# write html text to index.html for debug purpose
-# :param string html text
-def debug_writeToHTML(html):
-    f = open("../data/index.html", 'w', encoding='UTF-8')
-    f.write(html)
+#  append output parsed data to source
+# :param list of Course object
+# :param course term
+def writeToCsv(courseLists, term):
+    f = open('./data/'+term+'.csv', 'a', newline='')
+
+    csvWriter = csv.writer(f, delimiter='|', quotechar=',', quoting=csv.QUOTE_MINIMAL)
+
+    for courseList in courseLists:
+
+        if courseList is None: continue
+        
+        for course in courseList:
+
+            csvWriter.writerow([str(course)])
+    
     f.close()
+    return
+
+def convertToCsv(term):
+    df = pd.read_csv('./data/'+term+'.txt', sep='|')
+    df.to_csv('./data/'+term+'.csv',index=False)    
+
+    return
 
 #  append output parsed data to source
 # :param list of Course object
 # :param course term
-def writeToText(courseList, term):
-    if courseList is None:
-        return
-        
-    f = open('./data/'+term+'.txt','w', encoding='UTF-8')
-    for course in courseList:
-        f.write(str(course))
+def writeToText(courseLists, term):
+    
+    f = open('./data/'+term+'.txt','a', encoding='UTF-8')
+
+    for courseList in courseLists:
+
+        if courseList is None: continue
+
+        for course in courseList:
+
+            f.write(str(course))
     
     f.close()
+    return
+
+#  append output parsed data to source
+# :param list of Course object
+# :param course term
+def writeToJson(courseLists, term):
+    
+    f = open('./data/'+term+'.json','a', encoding='UTF-8')
+    
+    data = {"course": []}
+
+    for courseList in courseLists:
+        
+        if courseList is None: continue
+        
+        for course in courseList:
+            data["course"].append({
+                "courseTerm": course.getTerm(),
+                "courseTitle": course.getCourseTitle(),
+                "courseCRN": course.getCourseCRN(),
+                "courseID": course.getCourseID(),
+                "courseSection": course.getSectionID(),
+                "courseType": course.getType(),
+                "courseTime": course.getTime(),
+                "courseDay": course.getDays(),
+                "courseLocation": course.getLocation(),
+                "courseInstructor": course.getInstructor(),
+                "courseSubject": course.getSubject(),
+                "courseLevel": course.getLevel(),
+                "courseCredit": course.getCredit(),
+                "courseAttribute": course.getAttribute(),
+            })
 
     
+    parsed = json.dumps(data, separators=(',', ":"))
+    f.write(parsed)
+    f.close()
+    return
