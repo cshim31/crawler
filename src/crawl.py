@@ -20,5 +20,6 @@ def task(term):
     tools.writeToText(courseLists, term)
     tools.writeToJson(courseLists, term)
     #tools.writeToCsv(courseList, term)
-    
+    tools.integrateToText(courseLists, term)
     tools.convertToCsv(term)
+    tools.convertToCsv('course')

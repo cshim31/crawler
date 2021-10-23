@@ -297,3 +297,23 @@ def writeToJson(courseLists, term):
     f.write(parsed)
     f.close()
     return
+
+
+# This method is for admin. Following functions modifies output name for certain purpose
+#  append output parsed data to source
+# :param list of Course object
+# :param course term
+def integrateToText(courseLists, term):
+    
+    f = open('./data/course.txt','a', encoding='UTF-8')
+
+    for courseList in courseLists:
+
+        if courseList is None: continue
+
+        for course in courseList:
+
+            f.write(str(course))
+    
+    f.close()
+    return
