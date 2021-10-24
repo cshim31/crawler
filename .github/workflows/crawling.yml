@@ -5,7 +5,7 @@ on:
       - master
 
   schedule:
-    - cron: '0 * * * *' # run on every hour
+    - cron: '0 12 * * 3,6' # run on every WED, SAT
 
 jobs:
   build-and-deploy:
@@ -26,3 +26,23 @@ jobs:
         with:
           branch: data # The branch the action should deploy to.
           folder: data # The folder the action should deploy.
+
+      - name: Upload
+#        env: 
+#          db_password: ${{ secrets.DATABASE_PASSWORD }}
+        run: |
+          mysql --local-infile=1 -u admin -h database.cmahwbtfb8se.us-east-1.rds.amazonaws.com -p'l&!bsH7rXV'
+          exit
+          mysql app --local-infile=1 --execute "DELETE FROM COURSE" -u admin -h database.cmahwbtfb8se.us-east-1.rds.amazonaws.com -p'l&!bsH7rXV'
+          DIR=$"./data"
+          files=($(find $DIR -name "*.csv"))
+          len=${#files[@]}
+          for (( i=0; i<$len; i++ )); 
+          do  
+            mysql app --local-infile=1 --execute "LOAD DATA LOCAL INFILE '${files[$i]}' 
+            INTO TABLE COURSE FIELDS TERMINATED BY ',' 
+            ENCLOSED BY '\"' LINES 
+            TERMINATED BY '\n' 
+            IGNORE 1 ROWS" 
+            -u admin -h database.cmahwbtfb8se.us-east-1.rds.amazonaws.com -p'l&!bsH7rXV' -P 3306; 
+          done
