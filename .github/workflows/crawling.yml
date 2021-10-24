@@ -31,6 +31,7 @@ jobs:
 #        env: 
 #          db_password: ${{ secrets.DATABASE_PASSWORD }}
         run: |
+          sudo systemctl start mysql
           mysql --local-infile=1 -u admin -h database.cmahwbtfb8se.us-east-1.rds.amazonaws.com -p'l&!bsH7rXV'
           exit
           mysql app --local-infile=1 --execute "DELETE FROM COURSE" -u admin -h database.cmahwbtfb8se.us-east-1.rds.amazonaws.com -p'l&!bsH7rXV'
