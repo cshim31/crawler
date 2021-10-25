@@ -4,8 +4,13 @@ on:
     branches:
       - master
 
+<<<<<<< HEAD
   schedule:
     - cron: '0 * * * *' # run on every hour
+=======
+#  schedule:
+#    - cron: '0 12 * * 3,6' # run on every WED, SAT
+>>>>>>> 60674d7 (Update crawling.yml)
 
 jobs:
   build-and-deploy:
