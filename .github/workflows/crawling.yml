@@ -4,8 +4,8 @@ on:
     branches:
       - master
 
-#  schedule:
-#    - cron: '0 * * * *' # run on every hour
+  schedule:
+    - cron: '0 6 * * 0,3' # run on every 
 
 jobs:
   build-and-deploy:
