@@ -3919,16 +3919,16 @@
 202108,Computer Science,Computer Networking I,89545,CS 3251,R,Class,3:00 pm - 4:15 pm,W,Georgia Tech Lorraine,Henry Walter Lilly  Owen (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,"Networking&Telecom(CS),GTLMetz(UGProgram),TechElectCS,Engr,&Sciences,OneSemester,StudyAbroad,BranchCampusAbroad"
 202108,Computer Science,Intro to Software Engr,92352,CS 3300,A,Class,9:30 am - 10:45 am,MW,College of Computing 101,Nimisha   Roy (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,"SoftwareEngineering(CS),TechElectCS,Engr,&Sciences"
 202108,Computer Science,Intro to Software Engr,94939,CS 3300,B,Class,3:30 pm - 4:45 pm,MW,Kendeda 230,Aibek Manas  Musaev (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,"SoftwareEngineering(CS),TechElectCS,Engr,&Sciences"
-202108,Computer Science,Project Design,86034,CS 3311,JDA,Class,9:30 am - 10:20 am,M,Mason 3133,"Ronnie G  Howard (P), Dorothea S  Coblentz","GraduateSemester,UndergraduateSemester",1.000 Credits,
-202108,Computer Science,Project Design,86035,CS 3311,JDB,Class,11:00 am - 11:50 am,M,Van Leer E283,"Ronnie G  Howard (P), Dorothea S  Coblentz","GraduateSemester,UndergraduateSemester",1.000 Credits,
+202108,Computer Science,Project Design,86034,CS 3311,JDA,Class,9:30 am - 10:20 am,M,Mason 3133,Ronnie G  Howard (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
+202108,Computer Science,Project Design,86035,CS 3311,JDB,Class,11:00 am - 11:50 am,M,Van Leer E283,Ronnie G  Howard (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
 202108,Computer Science,Project Design,86430,CS 3311,JDD,Class,2:00 pm - 2:50 pm,M,Van Leer C340,Mary   Hudachek-Buswell (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
-202108,Computer Science,Project Design,87043,CS 3311,JDE,Class,3:30 pm - 4:20 pm,M,East Architecture 207,"Charles Wesley  Lively (P), Amanda K  Girard","GraduateSemester,UndergraduateSemester",1.000 Credits,
-202108,Computer Science,Project Design,87044,CS 3311,JDF,Class,5:00 pm - 5:50 pm,M,Van Leer E283,"Aibek Manas  Musaev (P), Amanda K  Girard","GraduateSemester,UndergraduateSemester",1.000 Credits,
+202108,Computer Science,Project Design,87043,CS 3311,JDE,Class,3:30 pm - 4:20 pm,M,East Architecture 207,Charles Wesley  Lively (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
+202108,Computer Science,Project Design,87044,CS 3311,JDF,Class,5:00 pm - 5:50 pm,M,Van Leer E283,Aibek Manas  Musaev (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
 202108,Computer Science,Project Design,86036,CS 3311,SLS,Class,12:30 pm - 1:20 pm,M,College of Computing 101,Mary   Hudachek-Buswell (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
-202108,Computer Science,Project Implementation,90731,CS 3312,JIA,Class,11:00 am - 11:50 am,WF,College of Computing 101,"Susan Gayle  Watson-Phillips (P), Jill   Fennell","GraduateSemester,UndergraduateSemester",2.000 Credits,Capstone
-202108,Computer Science,Project Implementation,86037,CS 3312,JIB,Class,2:00 pm - 2:50 pm,WF,Mason 3133,"Susan Gayle  Watson-Phillips (P), Jill   Fennell","GraduateSemester,UndergraduateSemester",2.000 Credits,
-202108,Computer Science,Project Implementation,86038,CS 3312,JIC,Class,12:30 pm - 1:20 pm,WF,Klaus Advanced Computing 2447,"Susan Gayle  Watson-Phillips (P), Jill   Fennell","GraduateSemester,UndergraduateSemester",2.000 Credits,
-202108,Computer Science,Project Implementation,86736,CS 3312,JID,Class,2:00 pm - 2:50 pm,WF,Clough UG Learning Commons 102,"Charles Wesley  Lively (P), Amanda K  Girard","GraduateSemester,UndergraduateSemester",2.000 Credits,
+202108,Computer Science,Project Implementation,90731,CS 3312,JIA,Class,11:00 am - 11:50 am,WF,College of Computing 101,Susan Gayle  Watson-Phillips (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,Capstone
+202108,Computer Science,Project Implementation,86037,CS 3312,JIB,Class,2:00 pm - 2:50 pm,WF,Mason 3133,Susan Gayle  Watson-Phillips (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,
+202108,Computer Science,Project Implementation,86038,CS 3312,JIC,Class,12:30 pm - 1:20 pm,WF,Klaus Advanced Computing 2447,Susan Gayle  Watson-Phillips (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,
+202108,Computer Science,Project Implementation,86736,CS 3312,JID,Class,2:00 pm - 2:50 pm,WF,Clough UG Learning Commons 102,Charles Wesley  Lively (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,
 202108,Computer Science,Computer Graphics,82287,CS 3451,A,Class,12:30 pm - 1:45 pm,TR,Paper Tricentennial 109,Blair   MacIntyre (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,"Graphics&Visualization(CS),TechElectCS,Engr,&Sciences"
 202108,Computer Science,Dsgn&AnalysisAlgorithms,81565,CS 3510,A,Class,12:30 pm - 1:45 pm,TR,Scheller College of Business 100,Jacob   Abernethy (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,"TechElectCS,Engr,&Sciences"
 202108,Computer Science,Algorithms Honors,93820,CS 3511,A,Class,2:00 pm - 3:15 pm,TR,Kendeda 210,Merrick L  Furst (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,
@@ -4073,6 +4073,7 @@
 202108,Computer Science,Undergraduate Research,85994,CS 4699,F04,Class,TBA,,TBA,James D  Foley (P),"GraduateSemester,UndergraduateSemester",1.000 TO       12.000 Credits,"TechElectCS,Engr,&Sciences"
 202108,Computer Science,Undergraduate Research,86560,CS 4699,F06,Class,TBA,,TBA,Merrick L  Furst (P),"GraduateSemester,UndergraduateSemester",1.000 TO       12.000 Credits,"TechElectCS,Engr,&Sciences"
 202108,Computer Science,Undergraduate Research,87295,CS 4699,F08,Class,TBA,,TBA,Lance Jeremy  Fortnow (P),"GraduateSemester,UndergraduateSemester",1.000 TO       12.000 Credits,"TechElectCS,Engr,&Sciences"
+202108,Computer Science,Undergraduate Research,95332,CS 4699,F13,Class,TBA,,TBA,Florian   Schaefer (P),"GraduateSemester,UndergraduateSemester",1.000 TO       12.000 Credits,"TechElectCS,Engr,&Sciences,Res/CP>=101conthrs"
 202108,Computer Science,Undergraduate Research,81944,CS 4699,G02,Class,TBA,,TBA,Ashok K  Goel (P),"GraduateSemester,UndergraduateSemester",1.000 TO       12.000 Credits,"TechElectCS,Engr,&Sciences"
 202108,Computer Science,Undergraduate Research,81888,CS 4699,G03,Class,TBA,,TBA,Mark   Guzdial (P),"GraduateSemester,UndergraduateSemester",1.000 TO       12.000 Credits,"TechElectCS,Engr,&Sciences"
 202108,Computer Science,Undergraduate Research,83241,CS 4699,G06,Class,TBA,,TBA,Rebecca Elizabeth  Grinter (P),"GraduateSemester,UndergraduateSemester",1.000 TO       12.000 Credits,"TechElectCS,Engr,&Sciences"
@@ -5438,7 +5439,7 @@
 202108,Earth and Atmospheric Sciences,Seminar,86449,EAS 8001,AB,Class,TBA,,TBA,"Annalisa   Bracco (P), Takamitsu   Ito","GraduateSemester,UndergraduateSemester",1.000 Credits,
 202108,Earth and Atmospheric Sciences,Seminar,86483,EAS 8001,AVN,Class,3:30 pm - 4:20 pm,F,Ford Environmental Sci & Tech L1175,Andrew Vern  Newman (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
 202108,Earth and Atmospheric Sciences,Seminar,81501,EAS 8001,B,Class,TBA,,TBA,Martial   Taillefert (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
-202108,Earth and Atmospheric Sciences,Seminar in Data Sciences,94443,EAS 8001,COS,Class,3:30 pm - 4:20 pm,F,Ford Environmental Sci & Tech L1205,"Roman O  Grigoriev (P), Annalisa   Bracco","GraduateSemester,UndergraduateSemester",1.000 Credits,
+202108,Earth and Atmospheric Sciences,Seminar,94443,EAS 8001,COS,Class,3:30 pm - 4:20 pm,F,Ford Environmental Sci & Tech L1205,"Roman O  Grigoriev (P), Annalisa   Bracco","GraduateSemester,UndergraduateSemester",1.000 Credits,
 202108,Earth and Atmospheric Sciences,Seminar,89316,EAS 8001,SEM,Class,11:25 am - 12:15 pm,F,TBA,"Frances   Rivera-Hernandez (P), Jennifer B  Glass","GraduateSemester,UndergraduateSemester",1.000 Credits,RemoteSynchronousCourse
 202108,Earth and Atmospheric Sciences,Seminar,80426,EAS 8011,A,Class,11:00 am - 11:50 am,R,Ford Environmental Sci & Tech L1205,"Alexander A  Robel (P), Jie   He","GraduateSemester,UndergraduateSemester",1.000 Credits,
 202108,Earth and Atmospheric Sciences,Special Topics,92309,EAS 8801,ZH,Class,11:00 am - 11:50 am,F,TBA,Zachary James  Handlos (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
@@ -8280,16 +8281,16 @@
 202108,"Literature, Media & Comm",Video Production,85499,LMC 3406,H,Class,3:30 pm - 4:45 pm,TR,Skiles 355,Logan   Freeman (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,Low-cost$40orundrreqtxtbk
 202108,"Literature, Media & Comm",Advanced Video Prod,93691,LMC 3407,TJ,Class,11:00 am - 12:15 pm,WF,Skiles 355,John E  Thornton (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,
 202108,"Literature, Media & Comm",Communicating Sci/Tech,93688,LMC 3412,A,Class,9:30 am - 10:20 am,MWF,Skiles 002,Brandy   Blake (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,
-202108,"Literature, Media & Comm",Tech Comm Approaches,91134,LMC 3431,JIA,Class,11:00 am - 11:50 am,M,College of Computing 101,"Jill   Fennell (P), Susan Gayle  Watson-Phillips","GraduateSemester,UndergraduateSemester",1.000 Credits,Capstone
-202108,"Literature, Media & Comm",Tech Comm Approaches,86067,LMC 3431,JIB,Class,2:00 pm - 2:50 pm,M,Mason 3133,"Jill   Fennell (P), Susan Gayle  Watson-Phillips","GraduateSemester,UndergraduateSemester",1.000 Credits,
-202108,"Literature, Media & Comm",Tech Comm Approaches,86068,LMC 3431,JIC,Class,12:30 pm - 1:20 pm,M,Klaus Advanced Computing 2447,"Jill   Fennell (P), Susan Gayle  Watson-Phillips","GraduateSemester,UndergraduateSemester",1.000 Credits,
-202108,"Literature, Media & Comm",Tech Comm Approaches,86103,LMC 3431,JID,Class,2:00 pm - 2:50 pm,M,Clough UG Learning Commons 102,"Amanda K  Girard (P), Charles Wesley  Lively","GraduateSemester,UndergraduateSemester",1.000 Credits,
-202108,"Literature, Media & Comm",Tech Comm Strategies,86069,LMC 3432,JDA,Class,9:30 am - 10:20 am,WF,TBA,"Dorothea S  Coblentz (P), Ronnie G  Howard","GraduateSemester,UndergraduateSemester",2.000 Credits,RemoteSynchronousCourse
-202108,"Literature, Media & Comm",Tech Comm Strategies,86070,LMC 3432,JDB,Class,11:00 am - 11:50 am,WF,TBA,"Dorothea S  Coblentz (P), Ronnie G  Howard","GraduateSemester,UndergraduateSemester",2.000 Credits,RemoteSynchronousCourse
-202108,"Literature, Media & Comm",Tech Comm Strategies,86427,LMC 3432,JDD,Class,2:00 pm - 2:50 pm,WF,Van Leer C340,"Lee   Hibbard (P), Mary   Hudachek-Buswell","GraduateSemester,UndergraduateSemester",2.000 Credits,
-202108,"Literature, Media & Comm",Tech Comm Strategies,87045,LMC 3432,JDE,Class,3:30 pm - 4:20 pm,WF,East Architecture 207,"Amanda K  Girard (P), Charles Wesley  Lively","GraduateSemester,UndergraduateSemester",2.000 Credits,
-202108,"Literature, Media & Comm",Tech Comm Strategies,87046,LMC 3432,JDF,Class,5:00 pm - 5:50 pm,WF,Van Leer E283,"Amanda K  Girard (P), Aibek Manas  Musaev","GraduateSemester,UndergraduateSemester",2.000 Credits,
-202108,"Literature, Media & Comm",Tech Comm Strategies,86071,LMC 3432,SLS,Class,12:30 pm - 1:20 pm,WF,College of Computing 101,"Lee   Hibbard (P), Mary   Hudachek-Buswell","GraduateSemester,UndergraduateSemester",2.000 Credits,
+202108,"Literature, Media & Comm",Tech Comm Approaches,91134,LMC 3431,JIA,Class,11:00 am - 11:50 am,M,College of Computing 101,Jill   Fennell (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,Capstone
+202108,"Literature, Media & Comm",Tech Comm Approaches,86067,LMC 3431,JIB,Class,2:00 pm - 2:50 pm,M,Mason 3133,Jill   Fennell (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
+202108,"Literature, Media & Comm",Tech Comm Approaches,86068,LMC 3431,JIC,Class,12:30 pm - 1:20 pm,M,Klaus Advanced Computing 2447,Jill   Fennell (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
+202108,"Literature, Media & Comm",Tech Comm Approaches,86103,LMC 3431,JID,Class,2:00 pm - 2:50 pm,M,Clough UG Learning Commons 102,Amanda K  Girard (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
+202108,"Literature, Media & Comm",Tech Comm Strategies,86069,LMC 3432,JDA,Class,9:30 am - 10:20 am,WF,TBA,Dorothea S  Coblentz (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,RemoteSynchronousCourse
+202108,"Literature, Media & Comm",Tech Comm Strategies,86070,LMC 3432,JDB,Class,11:00 am - 11:50 am,WF,TBA,Dorothea S  Coblentz (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,RemoteSynchronousCourse
+202108,"Literature, Media & Comm",Tech Comm Strategies,86427,LMC 3432,JDD,Class,2:00 pm - 2:50 pm,WF,Van Leer C340,Lee   Hibbard (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,
+202108,"Literature, Media & Comm",Tech Comm Strategies,87045,LMC 3432,JDE,Class,3:30 pm - 4:20 pm,WF,East Architecture 207,Amanda K  Girard (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,
+202108,"Literature, Media & Comm",Tech Comm Strategies,87046,LMC 3432,JDF,Class,5:00 pm - 5:50 pm,WF,Van Leer E283,Amanda K  Girard (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,
+202108,"Literature, Media & Comm",Tech Comm Strategies,86071,LMC 3432,SLS,Class,12:30 pm - 1:20 pm,WF,College of Computing 101,Lee   Hibbard (P),"GraduateSemester,UndergraduateSemester",2.000 Credits,
 202108,"Literature, Media & Comm",American Lit & Culture,90999,LMC 3511,M,Class,12:30 pm - 1:45 pm,MW,College of Computing 53,Bradley   Rittenhouse (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,HumanitiesRequirement
 202108,"Literature, Media & Comm",Victorian Lit & Culture,93877,LMC 3514,N,Class,12:30 pm - 1:45 pm,TR,TBA,Narin   Hassan (P),"GraduateSemester,UndergraduateSemester",3.000 Credits,"HumanitiesRequirement,RemoteSynchronousCourse"
 202108,"Literature, Media & Comm",Theatre Production III,85500,LMC 3661,A,Class,TBA,,TBA,Melissa   Foulger (P),"GraduateSemester,UndergraduateSemester",1.000 Credits,
