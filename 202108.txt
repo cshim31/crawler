@@ -3647,6 +3647,7 @@
 202108|Computer Science|Intro to Computing|84724|CS 1301|B|Class|11:00 am - 11:50 am|MWF|East Architecture 123|Melinda Hardy  McDaniel (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|Intro to Computing|90552|CS 1301|C|Class|2:00 pm - 2:50 pm|MWF|D.M. Smith 105|Melinda Hardy  McDaniel (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|Intro to Computing|89348|CS 1301|GR|Class|11:00 am - 11:50 am|MWF|East Architecture 123|Melinda Hardy  McDaniel (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
+202108|Computer Science|Intro to Computing|95334|CS 1301|GTL|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|Intro to Computing|87674|CS 1301|HP|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteAsynchronousCourse,HonorsProgram,STEMUSG
 202108|Computer Science|Intro to Computing|92361|CS 1301|O1|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteAsynchronousCourse,STEMUSG
 202108|Computer Science|Intro to Computing|93093|CS 1301|QH|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteAsynchronousCourse,STEMUSG
@@ -3668,6 +3669,7 @@
 202108|Computer Science|CS 1301 Recitation|93530|CS 1301R|C04|Class|6:30 pm - 7:45 pm|W|Cherry Emerson 320|Melinda Hardy  McDaniel (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|
 202108|Computer Science|CS 1301 Recitation|93531|CS 1301R|C05|Class|6:30 pm - 7:45 pm|R|College of Computing 101|Melinda Hardy  McDaniel (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|
 202108|Computer Science|CS 1301 Recitation|93523|CS 1301R|GR1|Class|5:00 pm - 6:15 pm|R|Kendeda 210|Melinda Hardy  McDaniel (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|
+202108||CS 1301 Recitation|95335|CS 1301R|GTL||||||GraduateSemester,UndergraduateSemester|0.000 Credits|
 202108|Computer Science|CS 1301 Recitation|93532|CS 1301R|HP1|Class|5:00 pm - 6:15 pm|R|TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|RemoteSynchronousCourse
 202108|Computer Science|CS 1301 Recitation|93533|CS 1301R|O1R|Class|5:00 pm - 6:15 pm|R|TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|RemoteSynchronousCourse
 202108|Computer Science|Intro Media Computation|81406|CS 1315|A|Class|8:25 am - 9:15 am|MWF|Scheller College of Business 100|Caleb August  Southern (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
@@ -3754,6 +3756,7 @@
 202108|Computer Science|CS 1371 Recitation|93597|CS 1371R|GR1|Class|5:00 pm - 6:15 pm|W|Klaus Advanced Computing 2456|Cedric Terrence  Stallworth (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|
 202108|Computer Science|CS 1371 Recitation|93598|CS 1371R|HP1|Class|5:00 pm - 6:15 pm|R|College of Computing 52|Kantwon Lamount  Rogers (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|HonorsProgram
 202108|Computer Science|CS 1371 Recitation|93599|CS 1371R|R01|Class|5:00 pm - 6:15 pm|R|TBA|Kantwon Lamount  Rogers (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|
+202108|Computer Science|Special Topics|95333|CS 1803|GTL|Class|TBA||TBA|Cedric   Pradalier (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|
 202108|Computer Science|Intro Discrete Math CS|84143|CS 2050|A|Class|2:00 pm - 3:15 pm|TR|Instructional Center 103|Ronnie G  Howard (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|Intro Discrete Math CS|84144|CS 2050|B|Class|3:30 pm - 4:45 pm|TR|Clough UG Learning Commons 144|Ronnie G  Howard (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|Intro Discrete Math CS|93369|CS 2050|GR|Class|2:00 pm - 3:15 pm|TR|Instructional Center 103|Ronnie G  Howard (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
@@ -7289,7 +7292,7 @@
 202108|English|English Composition I|88926|ENGL 1101|I3|Class|5:00 pm - 6:15 pm|TR|Skiles 308|Joseph   Salyer (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,IsolateCourseinCanvas
 202108|English|English Composition I|81859|ENGL 1101|J1|Class|11:00 am - 12:15 pm|MW|TBA|Gregory   Brennen (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,RemoteSynchronousCourse,Low-cost$40orundrreqtxtbk
 202108|English|English Composition I|80514|ENGL 1101|J2|Class|11:00 am - 12:15 pm|MW|Stephen C Hall 106|Corey J  Goergen (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement
-202108|English|English Composition I|88473|ENGL 1101|J3|Class|11:00 am - 12:15 pm|MW|TBA|J. Anderson   Frazee (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,RemoteSynchronousCourse,Low-cost$40orundrreqtxtbk
+202108|English|English Composition I|88473|ENGL 1101|J3|Class|11:00 am - 12:15 pm|MW|TBA|Gregory   Specter (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,RemoteSynchronousCourse,Low-cost$40orundrreqtxtbk
 202108|English|English Composition I|81290|ENGL 1101|K2|Class|8:00 am - 9:15 am|TR|Clough UG Learning Commons 123|Paige Davis  Arrington (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement
 202108|English|English Composition I|88472|ENGL 1101|K3|Class|8:00 am - 9:15 am|TR|Skiles 314|Molly M  Slavin (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,Low-cost$40orundrreqtxtbk
 202108|English|English Composition I|86300|ENGL 1101|L6|Class|12:30 pm - 1:45 pm|TR|Stephen C Hall 103|Molly M  Slavin (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,Low-cost$40orundrreqtxtbk
@@ -7299,12 +7302,12 @@
 202108|English|English Composition I|80518|ENGL 1101|U|Class|8:00 am - 9:15 am|MW|Kendeda 110|Corey J  Goergen (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement
 202108|English|English Composition I|85886|ENGL 1101|U2|Class|8:00 am - 9:15 am|MW|Clough UG Learning Commons 127|Rachel   Robinson (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement
 202108|English|English Composition I|80513|ENGL 1101|U3|Class|8:00 am - 9:15 am|MW|Skiles 314|Gregory   Brennen (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,Low-cost$40orundrreqtxtbk
-202108|English|English Composition I|88471|ENGL 1101|U4|Class|8:00 am - 9:15 am|MW|TBA|J. Anderson   Frazee (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,RemoteSynchronousCourse,Low-cost$40orundrreqtxtbk
+202108|English|English Composition I|88471|ENGL 1101|U4|Class|8:00 am - 9:15 am|MW|TBA|Gregory   Specter (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,RemoteSynchronousCourse,Low-cost$40orundrreqtxtbk
 202108|English|English Composition I|82040|ENGL 1101|X|Class|9:30 am - 10:45 am|MW|Stephen C Hall 106|Corey J  Goergen (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement
 202108|English|English Composition I|82041|ENGL 1101|X1|Class|9:30 am - 10:45 am|MW|Skiles 354|Rachel   Dean-Ruzicka (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,IsolateCourseinCanvas,Low-cost$40orundrreqtxtbk
 202108|English|English Composition I|82042|ENGL 1101|X2|Class|9:30 am - 10:45 am|MW|Clough UG Learning Commons 127|Rachel   Robinson (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement
 202108|English|English Composition I|86299|ENGL 1101|X3|Class|9:30 am - 10:45 am|MW|Clough UG Learning Commons 131|Gregory   Brennen (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,Low-cost$40orundrreqtxtbk
-202108|English|English Composition I|88474|ENGL 1101|X4|Class|9:30 am - 10:45 am|MW|TBA|J. Anderson   Frazee (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,RemoteSynchronousCourse,Low-cost$40orundrreqtxtbk
+202108|English|English Composition I|88474|ENGL 1101|X4|Class|9:30 am - 10:45 am|MW|TBA|Gregory   Specter (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,RemoteSynchronousCourse,Low-cost$40orundrreqtxtbk
 202108|English|English Composition II|88468|ENGL 1102|A|Class|9:30 am - 10:20 am|MWF|Swann 115|Eric   Lewis (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,Low-cost$40orundrreqtxtbk
 202108|English|English Composition II|83892|ENGL 1102|A5|Class|9:30 am - 10:20 am|MWF|Skiles 370|Leah S.  Misemer (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,Low-cost$40orundrreqtxtbk
 202108|English|English Composition II|83074|ENGL 1102|B1|Class|11:00 am - 11:50 am|MWF|Clough UG Learning Commons 278|Leah S.  Misemer (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|HumanitiesRequirement,Low-cost$40orundrreqtxtbk
