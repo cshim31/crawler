@@ -1,25 +1,25 @@
 import crawl
+import numpy as np
 
-def task(term):
+def task(courseTerm):
     courseLists = [[]]
-    # fetch course information for each course term
     
-    courseIDs, subjects = crawl.get_subjects(term)
-    courseList = []
-    for i in range(len(subjects)):
-        nums = crawl.get_courseNum(term, courseIDs[i])
+    courseSubjectPair = crawl.fetchCourseSubject(courseTerm)
+
+    for courseSubjectKey,courseSubjectValue in courseSubjectPair.items():
+        courseNums = crawl.fetchCourseNum(courseTerm, courseSubjectKey)
         
-        for num in nums:
-            courseList = crawl.get_course_info(term, subjects[i], courseIDs[i], num)
+        for courseNum in courseNums:
+            courseList = crawl.fetchSchedule(courseTerm, courseSubjectValue, courseSubjectKey, courseNum)
             if courseList is not None:
                 courseLists.append(courseList)
 
     
     # write parsed data to file output in excel
     print("Writing data...")
-    crawl.writeToText(courseLists, term)
-    crawl.writeToJson(courseLists, term)
+    crawl.writeToText(courseLists, courseTerm)
+    crawl.writeToJson(courseLists, courseTerm)
     #crawl.writeToCsv(courseList, term)
-    crawl.integrateToText(courseLists, term)
-    crawl.convertToCsv(term)
+    crawl.integrateToText(courseLists, courseTerm)
+    crawl.convertToCsv(courseTerm)
     crawl.convertToCsv('course')

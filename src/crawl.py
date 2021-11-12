@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 import re
 import constant
 import csv
-import pandas as pd
-import json
+import pandas as pd 
+import numpy as np
 
 class Course:
     def __init__(self, term='', courseTitle='', courseCRN='', courseID='', sectionID='', type='', time='', days='', location='', instructor='', subject='', level='', credit='', attribute=''):
@@ -75,8 +75,8 @@ class Course:
 # return most recent $(num) course terms
 # :param number of course terms to be extracted
 # :return list of course terms
-def get_terms(num): 
-    course_terms = []
+def fetchCourseTerm(num): 
+    courseTerms = []
     URL = 'https://oscar.gatech.edu/pls/bprod/bwckctlg.p_disp_dyn_ctlg'
 
     # Instantiate a request objects to document
@@ -93,67 +93,72 @@ def get_terms(num):
         month = valueTag[-2:]
         if month[0] < '1' or month[0] == '1' and month[1] <= '2':  
             term = valueTag
-            course_terms.append(term)
+            courseTerms.append(term)
 
-        if len(course_terms) is num :
+        if len(courseTerms) is num :
             break
-
-    print('Found ', len(course_terms), ' course terms')       
-    return course_terms
+  
+    return courseTerms
 
 
 # crawl the list of course ID and subjects with specified course term input
 # :param course term to extract course subjects available
 # :return list of course ID with specified course term
 # :return list of course subject
-def get_subjects(course_term):
-    courseIDs = []
-    course_subjects = []
+def fetchCourseSubject(courseTerm):
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_cat_term_date'
     
-    data = {
-        'call_proc_in' : 'bwckctlg.p_disp_dyn_ctlg',
-        'cat_term_in' : course_term
-    }
-    response = requests.post(URL, data, timeout=constant.TIMEOUT)
+    payload = [
+        ('call_proc_in', 'bwckctlg.p_disp_dyn_ctlg'),
+        ('cat_term_in', courseTerm)
+    ]
+
+    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
+    tagList = soup.find_all('option', value = True)
 
-    # bring option lists into list
-    lists = soup.find_all('option', value = True)
+    courseSubjectPair = {}
+    for tag in tagList:
+        courseSubjectPair[tag['value']] = tag.text
 
-    # Iterate the list of terms and append to list
-    for list in lists:
-        courseID = list['value']
-        course_subject = list.text
-        courseIDs.append(courseID)
-        course_subjects.append(course_subject)
-
-    return courseIDs, course_subjects
+    return courseSubjectPair
 
 
 # crawl the list of course number associated with specified course term and course ID input
 # :param course term to extract course subjects available
 # :param course ID to extract course number
 # :return list of course number 
-def get_courseNum(course_term, cours_IDs):
-    course_nums = []
-    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses?term_in='+course_term+'&call_proc_in=bwckctlg.p_disp_dyn_ctlg&sel_subj=dummy&sel_levl=dummy&sel_schd=dummy&sel_coll=dummy&sel_divs=dummy&sel_dept=dummy&sel_attr=dummy&sel_subj='+cours_IDs+'&sel_crse_strt=&sel_crse_end=&sel_title=&sel_levl=%&sel_schd:%&sel_coll:%&sel_divs:%&sel_dept:%&sel_from_cred:&sel_to_cred:&sel_attr:%'
-    
-    response = requests.get(URL, timeout=constant.TIMEOUT)
+def fetchCourseNum(courseTerm, courseID):
+    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses'
+    payload = [
+        ('term_in', courseTerm),
+        ('call_proc_in', 'bwckctlg.p_disp_dyn_ctlg'),
+        ('sel_subj', 'dummy'),
+        ('sel_levl', 'dummy'),
+        ('sel_schd', 'dummy'),
+        ('sel_coll', 'dummy'),
+        ('sel_divs', 'dummy'),
+        ('sel_dept', 'dummy'),
+        ('sel_attr', 'dummy'),
+        ('sel_subj', courseID),
+        ('sel_crse_strt', ''),
+        ('sel_crse_end', ''),
+        ('sel_title', ''),
+        ('sel_from_cred', ''),
+        ('sel_to_cred', ''),
+    ]
+
+    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
+    tagList = soup.find_all('td', class_='nttitle')
 
-     # bring a tag lists into list
-    lists = soup.find_all('td', class_='nttitle')
-    # Iterate the list of subject numbers and append to list
-    for list in lists:
-        title = list.text
-        courseNum = title.split(' ')[1]
-        course_nums.append(courseNum)
+    courseNums = [tag.text.split(' ')[1] for tag in tagList]
 
-    print(cours_IDs, ': Found ', len(course_nums), ' course numbers')       
-    return course_nums
+    return courseNums
 
 
 # crawl the list of course information associated with specified course term, course subject, course ID, and course number input
@@ -162,44 +167,49 @@ def get_courseNum(course_term, cours_IDs):
 # :param course ID 
 # :param course number with 
 # :return list of course object 
-def get_course_info(course_term, course_subject, course_ID, course_num):
+def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
     courseList = []
-    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse?term_in='+course_term+'&subj_in='+course_ID+'&crse_in='+course_num+'&schd_in=%' 
-    
-    response = requests.get(URL, timeout=constant.TIMEOUT)
+    #URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse?term_in='+courseTerm+'&subj_in='+course_ID+'&crse_in='+courseSubjectValue+'&schd_in=%' 
+    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
+    payload = [
+        ('term_in', courseTerm),
+        ('subj_in', courseSubjectValue),
+        ('crse_in', courseID),
+        ('schd_in', '%')
+    ]
+
+    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
-    # bring course list to lists 
-    data = soup.find('table', class_='datadisplaytable')
-
-    # check if course schedule exists or not
-    if(not data.find('th', class_='ddtitle')):
+    scheduleTableContent = soup.find('table', class_='datadisplaytable')
+    if(not scheduleTableContent.find('th', class_='ddtitle')):
         return
 
-    lists = str(data).split('<th class="ddtitle" scope="colgroup">')[1:]
-    # Iterate the list of terms and append to list
-    for list in lists:
-        # reinstantiate soup object for course info body
-        soup = BeautifulSoup(list, 'html.parser')
-        # course header section
-        titleStr = soup.find('a').text
-        title = titleStr.split('-')
-        term = course_term.strip()
-        subject = course_subject.strip()
+    scheduleTables = scheduleTableContent.prettify().split('<th class="ddtitle" scope="colgroup">')[1:]
+
+    for scheduleTable in scheduleTables:
+        soup = BeautifulSoup(scheduleTable, 'html.parser')
+
+        tableHead = soup.find('a')
+        title = tableHead.text.split('-')
+
         courseTitle = ''.join(title[:-3]).strip()  
         courseCRN = title[-3].strip()
         courseID = title[-2].strip()
         sectionID = title[-1].strip()
-        # course body section
-        body = soup.find('td', class_='dddefault')
-        level = re.sub('[:\s+]', '', body.find('span', text=re.compile('Levels:')).next_sibling).strip()
-        credit = body.find(text=re.compile('Credits')).strip()
-        bodyInfo = body.find_all('td')
-        # crawl sections if they are present
+
+        # ended up : 11/11/2021, 11:28 pm
+        tableBody = soup.find('td', class_='dddefault')
+        level = re.sub('[:\s+]', '', tableBody.find('span', text=re.compile('Levels:')).next_sibling).strip()
+        credit = tableBody.find(text=re.compile('Credits')).strip()
+        
+        bodyInfo = tableBody.find_all('td')
+        
         attribute = ''
-        if body.find('span', text=re.compile('Attributes:')) is not None :
-            attribute = re.sub('[:\s+]', '', body.find('span', text=re.compile('Attributes:')).next_sibling).strip()
+        if tableBody.find('span', text=re.compile('Attributes:')) is not None :
+            attribute = re.sub('[:\s+]', '', tableBody.find('span', text=re.compile('Attributes:')).next_sibling).strip()
 
         # crawl schedule data if schedule is present
         if bodyInfo:
@@ -210,10 +220,10 @@ def get_course_info(course_term, course_subject, course_ID, course_num):
             instructor = bodyInfo[6].text.strip()
 
             # Instantiate each course and append to course list
-            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, subject, level, credit, attribute))
+            courseList.append(Course(courseTerm, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, courseSubjectText, level, credit, attribute))
 
         else:
-            courseList.append(Course(term, courseTitle, courseCRN, courseID, sectionID, level=level, credit=credit, attribute = attribute))
+            courseList.append(Course(courseTerm, courseTitle, courseCRN, courseID, sectionID, level=level, credit=credit, attribute = attribute))
 
     return courseList
 
