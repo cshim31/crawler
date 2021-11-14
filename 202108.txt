@@ -1867,7 +1867,7 @@
 202108|Biomedical Engineering|Doctoral Thesis|86718|BMED 9000|HAM|Class|TBA||TBA|Frank Lester  Hammond (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Biomedical Engineering|Doctoral Thesis|86730|BMED 9000|HAR|Class|TBA||TBA|Ebrahim   Haroon (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Biomedical Engineering|Doctoral Thesis|94445|BMED 9000|HAY|Class|TBA||TBA|Karmella Ann  Haynes (P)|GraduateSemester|1.000 TO       21.000 Credits|
-202108|Biomedical Engineering|Doctoral Thesis|94928|BMED 9000|HEA|Class|TBA||TBA|TBA|GraduateSemester|1.000 TO       21.000 Credits|
+202108|Biomedical Engineering|Doctoral Thesis|94928|BMED 9000|HEA|Class|TBA||TBA|Esfandiar   Behravesh (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Biomedical Engineering|Doctoral Thesis|94645|BMED 9000|HEE|Class|TBA||TBA|Jennifer M  Cary (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Biomedical Engineering|Doctoral Thesis|81093|BMED 9000|HJO|Class|TBA||TBA|Hanjoong   Jo (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Biomedical Engineering|Doctoral Thesis|82778|BMED 9000|HLU|Class|TBA||TBA|Hang   Lu (P)|GraduateSemester|1.000 TO       21.000 Credits|
@@ -2660,7 +2660,7 @@
 202108|Chemistry|Doctoral Thesis|81179|CHEM 9000|ORL|Class|TBA||TBA|Thomas Michael  Orlando (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Chemistry|Doctoral Thesis|82235|CHEM 9000|OYE|Class|TBA||TBA|Adegboyega   Oyelere (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Chemistry|Doctoral Thesis|85164|CHEM 9000|PER|Class|TBA||TBA|Pamela   Peralta-Yahya (P)|GraduateSemester|1.000 TO       21.000 Credits|
-202108||Doctoral Thesis|85187|CHEM 9000|QIN||||||GraduateSemester|1.000 TO       21.000 Credits|
+202108|Chemistry|Doctoral Thesis|85187|CHEM 9000|QIN|Class|TBA||TBA|Dong   Qin (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Chemistry|Doctoral Thesis|85533|CHEM 9000|RED|Class|TBA||TBA|Amit   Reddi (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Chemistry|Doctoral Thesis|84837|CHEM 9000|REI|Class|TBA||TBA|Elsa   Reichmanis (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Chemistry|Doctoral Thesis|84572|CHEM 9000|REY|Class|TBA||TBA|John Robert  Reynolds (P)|GraduateSemester|1.000 TO       21.000 Credits|
@@ -3650,6 +3650,7 @@
 202108|Computer Science|Intro to Computing|95334|CS 1301|GTL|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|Intro to Computing|87674|CS 1301|HP|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteAsynchronousCourse,HonorsProgram,STEMUSG
 202108|Computer Science|Intro to Computing|92361|CS 1301|O1|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteAsynchronousCourse,STEMUSG
+202108|Computer Science|Intro to Computing|95336|CS 1301|O3|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|Intro to Computing|93093|CS 1301|QH|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteAsynchronousCourse,STEMUSG
 202108|Computer Science|Intro to Computing|94128|CS 1301|R|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|CS 1301 Recitation|93516|CS 1301R|A01|Class|5:00 pm - 6:15 pm|W|Van Leer C340|Rodrigo   Borela Valente (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|
@@ -3671,6 +3672,7 @@
 202108|Computer Science|CS 1301 Recitation|93523|CS 1301R|GR1|Class|5:00 pm - 6:15 pm|R|Kendeda 210|Melinda Hardy  McDaniel (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|
 202108||CS 1301 Recitation|95335|CS 1301R|GTL||||||GraduateSemester,UndergraduateSemester|0.000 Credits|
 202108|Computer Science|CS 1301 Recitation|93532|CS 1301R|HP1|Class|5:00 pm - 6:15 pm|R|TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|RemoteSynchronousCourse
+202108|Computer Science|CS 1301 Recitation|95338|CS 1301R|O01|Class|TBA||TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|
 202108|Computer Science|CS 1301 Recitation|93533|CS 1301R|O1R|Class|5:00 pm - 6:15 pm|R|TBA|David Andrew  Joyner (P)|GraduateSemester,UndergraduateSemester|0.000 Credits|RemoteSynchronousCourse
 202108|Computer Science|Intro Media Computation|81406|CS 1315|A|Class|8:25 am - 9:15 am|MWF|Scheller College of Business 100|Caleb August  Southern (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
 202108|Computer Science|Intro Media Computation|90877|CS 1315|GR|Class|8:25 am - 9:15 am|MWF|Scheller College of Business 100|Caleb August  Southern (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|STEMUSG
@@ -3914,6 +3916,7 @@
 202108|Computer Science|Special Topics|93311|CS 2801|LLC|Class|6:30 pm - 7:20 pm|T|College of Computing 52|Troy   Peace (P)|GraduateSemester,UndergraduateSemester|1.000 Credits|TechElectCS,Engr,&Sciences
 202108|Computer Science|Special Topics|88246|CS 2801|UTA|Class|TBA||TBA|Olufisayo A  Omojokun (P)|GraduateSemester,UndergraduateSemester|1.000 Credits|RemoteAsynchronousCourse,TechElectCS,Engr,&Sciences
 202108|Computer Science|Special Topics|92942|CS 2802|EP|Class|5:00 pm - 6:55 pm|M|Klaus Advanced Computing 1447|Jennifer Nicole  Whitlow (P)|GraduateSemester,UndergraduateSemester|2.000 Credits|TechElectCS,Engr,&Sciences
+202108|Computer Science|Special Topics|95337|CS 2802|MAT|Class|TBA||TBA|Cedric   Pradalier (P)|GraduateSemester,UndergraduateSemester|2.000 Credits|TechElectCS,Engr,&Sciences
 202108|Computer Science|DesignOperating Systems|89260|CS 3210|A|Class|12:30 pm - 1:45 pm|TR|Klaus Advanced Computing 1443|Ketan   Bhardwaj (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|ComputerSystems(CS),TechElectCS,Engr,&Sciences
 202108|Computer Science|DesignOperating Systems|89261|CS 3210|GR|Class|12:30 pm - 1:45 pm|TR|Klaus Advanced Computing 1443|Ketan   Bhardwaj (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|ComputerSystems(CS),TechElectCS,Engr,&Sciences
 202108|Computer Science|Processor Design|85524|CS 3220|A|Class|2:00 pm - 3:15 pm|MW|Instructional Center 215|Hyesoon   Kim (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|ComputerSystems(CS),TechElectCS,Engr,&Sciences
@@ -5461,7 +5464,7 @@
 202108|Earth and Atmospheric Sciences|Special Problems|83126|EAS 8901|YD|Class|TBA||TBA|Yi   Deng (P)|GraduateSemester,UndergraduateSemester|1.000 TO       21.000 Credits|
 202108|Earth and Atmospheric Sciences|Special Problems|82734|EAS 8901|YW|Class|TBA||TBA|Yuhang   Wang (P)|GraduateSemester,UndergraduateSemester|1.000 TO       21.000 Credits|
 202108|Earth and Atmospheric Sciences|Special Problems|82365|EAS 8903|ZP|Class|TBA||TBA|Zhigang   Peng (P)|GraduateSemester,UndergraduateSemester|1.000 TO       21.000 Credits|
-202108|Earth and Atmospheric Sciences|Teaching Assistantship|81073|EAS 8997|A|Class|TBA||TBA|TBA|GraduateSemester,UndergraduateSemester|1.000 TO        9.000 Credits|
+202108|Earth and Atmospheric Sciences|Teaching Assistantship|81073|EAS 8997|A|Class|TBA||TBA|Samantha   Wilson (P)|GraduateSemester,UndergraduateSemester|1.000 TO        9.000 Credits|
 202108|Earth and Atmospheric Sciences|Research Assistantship|87837|EAS 8998|BS|Class|TBA||TBA|Britney Elyce  Schmidt (P)|GraduateSemester,UndergraduateSemester|1.000 TO        9.000 Credits|
 202108|Earth and Atmospheric Sciences|Research Assistantship|82416|EAS 8998|EI|Class|TBA||TBA|Ellery D.  Ingall (P)|GraduateSemester,UndergraduateSemester|1.000 TO        9.000 Credits|
 202108|Earth and Atmospheric Sciences|Research Assistantship|81826|EAS 8998|RW|Class|TBA||TBA|Rodney J.  Weber (P)|GraduateSemester,UndergraduateSemester|1.000 TO        9.000 Credits|
@@ -5497,7 +5500,7 @@
 202108||Doctoral Thesis|91102|EAS 9000|PL||||||GraduateSemester|1.000 TO       21.000 Credits|
 202108|Earth and Atmospheric Sciences|Doctoral Thesis|81487|EAS 9000|RB|Class|TBA||TBA|Jingfeng   Wang (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Earth and Atmospheric Sciences|Doctoral Thesis|80527|EAS 9000|RJW|Class|TBA||TBA|Rodney J.  Weber (P)|GraduateSemester|1.000 TO       21.000 Credits|
-202108|Earth and Atmospheric Sciences|Doctoral Thesis|93218|EAS 9000|SN|Class|TBA||TBA|TBA|GraduateSemester|1.000 TO       21.000 Credits|
+202108|Earth and Atmospheric Sciences|Doctoral Thesis|93218|EAS 9000|SN|Class|TBA||TBA|Samer   Naif (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Earth and Atmospheric Sciences|Doctoral Thesis|80522|EAS 9000|SS|Class|TBA||TBA|Sven   Simon (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Earth and Atmospheric Sciences|Doctoral Thesis|82163|EAS 9000|TI|Class|TBA||TBA|Takamitsu   Ito (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Earth and Atmospheric Sciences|Doctoral Thesis|93173|EAS 9000|WC|Class|TBA||TBA|Wing   Chu (P)|GraduateSemester|1.000 TO       21.000 Credits|
@@ -7870,7 +7873,7 @@
 202108|Industrial & Systems Engr|Doctoral Thesis|80688|ISYE 9000|GOL|Class|TBA||TBA|David   Goldsman (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Industrial & Systems Engr|Doctoral Thesis|88838|ISYE 9000|GUP|Class|TBA||TBA|Swati   Gupta (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Industrial & Systems Engr|Doctoral Thesis|81099|ISYE 9000|HUO|Class|TBA||TBA|Xiaoming   Huo (P)|GraduateSemester|1.000 TO       21.000 Credits|
-202108|Industrial & Systems Engr|Doctoral Thesis|86410|ISYE 9000|JLI|Class|TBA||TBA|TBA|GraduateSemester|1.000 TO       21.000 Credits|
+202108|Industrial & Systems Engr|Doctoral Thesis|86410|ISYE 9000|JLI|Class|TBA||TBA|Jing   Li (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Industrial & Systems Engr|Doctoral Thesis|81997|ISYE 9000|JOS|Class|TBA||TBA|Roshan Vengazhiyil  Joseph (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Industrial & Systems Engr|Doctoral Thesis|81100|ISYE 9000|KES|Class|TBA||TBA|Pinar   Keskinocak (P)|GraduateSemester|1.000 TO       21.000 Credits|
 202108|Industrial & Systems Engr|Doctoral Thesis|82786|ISYE 9000|KIM|Class|TBA||TBA|Seong-Hee   Kim (P)|GraduateSemester|1.000 TO       21.000 Credits|
@@ -8559,9 +8562,9 @@
 202108|Management|Mgt of Fin Institutions|86617|MGT 6090|A|Class|6:30 pm - 9:15 pm|T|Scheller College of Business 200|Sudheer   Chava (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|
 202108|Management|Mgt of Fin Institutions|83307|MGT 6090|EM|Class|6:30 pm - 9:15 pm|T|Scheller College of Business 200|Sudheer   Chava (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|
 202108|Management|Leadership & Org Change|87029|MGT 6107|QML|Class|TBA||TBA|Robert Nelson  Thomas (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|
-202108|Management|Negotiation and Conflict|81182|MGT 6110|A|Class|5:00 pm - 7:45 pm|T|TBA|Christina E  Shalley (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteSynchronousCourse
-202108|Management|Negotiation and Conflict|94103|MGT 6110|EM|Class|6:30 pm - 9:15 pm|W|TBA|Christina E  Shalley (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteSynchronousCourse
-202108|Management|Negotiation and Conflict|82871|MGT 6110|EMA|Class|5:00 pm - 7:45 pm|T|TBA|Christina E  Shalley (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteSynchronousCourse
+202108|Management|Negotiation and Conflict|81182|MGT 6110|A|Class|5:00 pm - 7:45 pm|T|TBA|Christina E  Shalley (P), Terry C  Blum|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteSynchronousCourse
+202108|Management|Negotiation and Conflict|94103|MGT 6110|EM|Class|6:30 pm - 9:15 pm|W|TBA|Christina E  Shalley (P), Terry C  Blum|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteSynchronousCourse
+202108|Management|Negotiation and Conflict|82871|MGT 6110|EMA|Class|5:00 pm - 7:45 pm|T|TBA|Christina E  Shalley (P), Terry C  Blum|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteSynchronousCourse
 202108|Management|NonProfit Team Cons Proj|84163|MGT 6113|A|Class|TBA||TBA|Terry C  Blum (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|
 202108|Management|NonProfit Team Cons Proj|84162|MGT 6113|EM|Class|TBA||TBA|Terry C  Blum (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|
 202108|Management|Leadership Development|94899|MGT 6114|A|Class|TBA||TBA|Terry C  Blum (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|
@@ -11600,7 +11603,6 @@
 202108|Psychology|SemIndust/Organiz Psy|88313|PSYC 8050|CW|Class|9:30 am - 10:45 am|MW|J. S. Coon 161|Christopher   Wiese (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|
 202108|Psychology|SemQuantitative Psy|89541|PSYC 8060|B|Class|12:30 pm - 1:45 pm|W|TBA|Susan   Embretson (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteSynchronousCourse
 202108|Psychology|SemQuantitative Psy|94692|PSYC 8060|C|Class|12:30 pm - 1:45 pm|R|TBA|Susan   Embretson (P)|GraduateSemester,UndergraduateSemester|3.000 Credits|RemoteSynchronousCourse
-202108|Psychology|Special Topics|94783|PSYC 8811|A|Class|3:30 pm - 4:20 pm|F|Ford Environmental Sci & Tech L1205|Michael   Hunter (P)|GraduateSemester,UndergraduateSemester|1.000 Credits|
 202108|Psychology|Spec ProbEngr Psy|81219|PSYC 8901|BW|Class|TBA||TBA|Bruce N.  Walker (P)|GraduateSemester,UndergraduateSemester|1.000 TO       21.000 Credits|
 202108|Psychology|Spec ProbEngr Psy|83158|PSYC 8901|FD|Class|TBA||TBA|Francis T  Durso (P)|GraduateSemester,UndergraduateSemester|1.000 TO       21.000 Credits|
 202108|Psychology|Spec ProbEngr Psy|86439|PSYC 8901|JG|Class|TBA||TBA|Jamie C  Gorman (P)|GraduateSemester,UndergraduateSemester|1.000 TO       21.000 Credits|
