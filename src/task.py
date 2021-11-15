@@ -11,11 +11,11 @@ def task(courseTerm):
         courseNums = crawl.fetchCourseNum(courseTerm, courseSubjectKey)
         for courseNum in courseNums:
             #print('fetcing %s:%s' % (courseSubjectKey, courseNum))
-            courseList = crawl.fetchSchedule(courseTerm, courseSubjectValue, courseSubjectKey, courseNum)
+            courseList = crawl.fetchSchedule(courseTerm, courseSubjectKey, courseSubjectValue, courseNum)
+            print(courseList)
             if courseList:
                 courseLists.extend(courseList)
 
-    
     # write parsed data to file output in excel
     print("Writing csv...")
     parse.writeCSV(courseLists, courseTerm)

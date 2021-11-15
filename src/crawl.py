@@ -174,9 +174,8 @@ def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
         ('crse_in', courseID),
         ('schd_in', '%')
     ]
-
+    
     response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
-
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
