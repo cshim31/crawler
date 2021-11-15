@@ -1,75 +1,73 @@
 import requests
-import json
 from bs4 import BeautifulSoup
 import re
 import constant
-import csv
-import pandas as pd 
 import numpy as np
+import parse
 
 class Course:
-    def __init__(self, term='', courseTitle='', courseCRN='', courseID='', sectionID='', type='', time='', days='', location='', instructor='', subject='', level='', credit='', attribute=''):
-        self.term = term
+    def __init__(self, courseTerm='', courseMajor='', courseTitle='', courseCRN='', courseArea='', courseSection='', courseClass='', courseTime='', courseDay='', courseLocation='', courseInstructor='', courseUniversity='', courseCredit='', courseAttribute=[]):
+        self.courseTerm = courseTerm
+        self.courseMajor = courseMajor
         self.courseTitle = courseTitle
         self.courseCRN = courseCRN
-        self.courseID = courseID
-        self.sectionID = sectionID
-        self.type = type
-        self.time = time
-        self.days = days
-        self.location = location
-        self.instructor = instructor
-        self.subject = subject
-        self.level = level
-        self.credit = credit
-        self.attribute = attribute
+        self.courseArea = courseArea
+        self.courseSection = courseSection
+        self.courseClass = courseClass
+        self.courseTime = courseTime
+        self.courseDay = courseDay
+        self.courseLocation = courseLocation
+        self.courseInstructor = courseInstructor
+        self.courseUniversity = courseUniversity
+        self.courseCredit = courseCredit
+        self.courseAttribute = courseAttribute
 
     # getters & setters
     def getTerm(self):
-        return self.term
+        return self.courseTerm
 
-    def getCourseTitle(self):
+    def getMajor(self):
+        return self.courseMajor
+
+    def getTitle(self):
         return self.courseTitle
     
-    def getCourseCRN(self):
+    def getCRN(self):
         return self.courseCRN
 
-    def getCourseID(self):
-        return self.courseID
+    def getArea(self):
+        return self.courseArea
 
-    def getSectionID(self):
-        return self.sectionID
+    def getSection(self):
+        return self.courseSection
 
-    def getType(self):
-        return self.type    
+    def getClass(self):
+        return self.courseClass    
 
     def getTime(self):
-        return self.time 
+        return self.courseTime 
 
-    def getDays(self):
-        return self.days
+    def getDay(self):
+        return self.courseDay
 
     def getLocation(self):
-        return self.location
+        return self.courseLocation
 
     def getInstructor(self):
-        return self.instructor
+        return self.courseInstructor
 
-    def getSubject(self):
-        return self.subject
-
-    def getLevel(self):
-        return self.level
+    def getUniversity(self):
+        return self.courseUniversity
     
     def getCredit(self):
-        return self.credit
+        return self.courseCredit
 
     def getAttribute(self):
-        return self.attribute
+        return self.courseAttribute
 
     # string format
     def __str__(self):
-        return self.getTerm() + '|' + self.getSubject() + '|' + self.getCourseTitle() + '|' + self.getCourseCRN() + '|' + self.getCourseID()  + '|' + self.getSectionID() + '|' + self.getType() + '|' + self.getTime()  + '|' + self.getDays()  + '|' + self.getLocation()  + '|' + self.getInstructor()  + '|' + self.getLevel()  + '|' + self.getCredit() + '|' + self.getAttribute() + '\n'
+        return self.getTerm() + '|' + self.getMajor() + '|' + self.getTitle() + '|' + self.getCRN() + '|' + self.getArea()  + '|' + self.getSection() + '|' + self.getClass() + '|' + self.getTime()  + '|' + self.getDay()  + '|' + self.getLocation()  + '|' + self.getInstructor()  + '|' + self.getUniversity()  + '|' + self.getCredit() + '|' + ','.join(self.getAttribute()) + '\n'
 
 # crawl the list of course terms with specified num input
 # return most recent $(num) course terms
@@ -169,7 +167,6 @@ def fetchCourseNum(courseTerm, courseID):
 # :return list of course object 
 def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
     courseList = []
-    #URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse?term_in='+courseTerm+'&subj_in='+course_ID+'&crse_in='+courseSubjectValue+'&schd_in=%' 
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
     payload = [
         ('term_in', courseTerm),
@@ -195,135 +192,26 @@ def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
         tableHead = soup.find('a')
         title = tableHead.text.split('-')
 
-        courseTitle = ''.join(title[:-3]).strip()  
-        courseCRN = title[-3].strip()
-        courseID = title[-2].strip()
-        sectionID = title[-1].strip()
+        courseTitle = title[0].strip()
+        courseCRN = title[1].strip()
+        courseArea = title[2].strip()
+        courseSection = title[3].strip()
 
-        # ended up : 11/11/2021, 11:28 pm
         tableBody = soup.find('td', class_='dddefault')
-        level = re.sub('[:\s+]', '', tableBody.find('span', text=re.compile('Levels:')).next_sibling).strip()
-        credit = tableBody.find(text=re.compile('Credits')).strip()
-        
-        bodyInfo = tableBody.find_all('td')
-        
-        attribute = ''
-        if tableBody.find('span', text=re.compile('Attributes:')) is not None :
-            attribute = re.sub('[:\s+]', '', tableBody.find('span', text=re.compile('Attributes:')).next_sibling).strip()
+        courseUniversity = re.sub('[:\s+]', '', tableBody.find('span', text=re.compile('Levels:')).next_sibling).strip()
+        courseCredit = tableBody.find(text=re.compile('Credits')).strip()
+        attributes = tableBody.find_all(string=['Remote Synchronous Course', 'Remote Asynchronous Course', 'Hybrid', 'Residential'])
+        courseAttribute = attributes.pop() if len(attributes) > 0 else ''
 
-        # crawl schedule data if schedule is present
-        if bodyInfo:
-            type = bodyInfo[0].text.strip()
-            time = bodyInfo[1].text.strip()
-            days = bodyInfo[2].text.strip()
-            location = bodyInfo[3].text.strip()
-            instructor = bodyInfo[6].text.strip()
+        bodyInfo = tableBody.find_all('td', class_='dddefault')
+        courseClass = bodyInfo[0].text.strip()
+        courseTime = bodyInfo[1].text.strip()
+        courseDay = bodyInfo[2].text.strip()
+        courseLocation = bodyInfo[3].text.strip()
+        courseInstructor = bodyInfo[6].text.split('(')[0].strip()
 
-            # Instantiate each course and append to course list
-            courseList.append(Course(courseTerm, courseTitle, courseCRN, courseID, sectionID, type, time, days, location, instructor, courseSubjectText, level, credit, attribute))
+        parse.removeSpaces(courseInstructor)
 
-        else:
-            courseList.append(Course(courseTerm, courseTitle, courseCRN, courseID, sectionID, level=level, credit=credit, attribute = attribute))
+        courseList.append(Course(courseTerm, courseSubjectText, courseTitle, courseCRN, courseArea, courseSection, courseClass, courseTime, courseDay, courseLocation, courseInstructor, courseUniversity, courseCredit, courseAttribute))
 
     return courseList
-
-
-#  append output parsed data to source
-# :param list of Course object
-# :param course term
-def writeToCsv(courseLists, term):
-    f = open('./data/'+term+'.csv', 'a', newline='')
-
-    csvWriter = csv.writer(f, delimiter='|', quotechar=',', quoting=csv.QUOTE_MINIMAL)
-
-    for courseList in courseLists:
-
-        if courseList is None: continue
-        
-        for course in courseList:
-
-            csvWriter.writerow([str(course)])
-    
-    f.close()
-    return
-
-def convertToCsv(term):
-    df = pd.read_csv('./data/'+term+'.txt', sep='|')
-    df.to_csv('./data/'+term+'.csv',index=False)    
-
-    return
-
-#  append output parsed data to source
-# :param list of Course object
-# :param course term
-def writeToText(courseLists, term):
-    
-    f = open('./data/'+term+'.txt','a', encoding='UTF-8')
-
-    for courseList in courseLists:
-
-        if courseList is None: continue
-
-        for course in courseList:
-
-            f.write(str(course))
-    
-    f.close()
-    return
-
-#  append output parsed data to source
-# :param list of Course object
-# :param course term
-def writeToJson(courseLists, term):
-    
-    f = open('./data/'+term+'.json','a', encoding='UTF-8')
-    
-    data = {"course": []}
-
-    for courseList in courseLists:
-        
-        if courseList is None: continue
-        
-        for course in courseList:
-            data["course"].append({
-                "courseTerm": course.getTerm(),
-                "courseTitle": course.getCourseTitle(),
-                "courseCRN": course.getCourseCRN(),
-                "courseID": course.getCourseID(),
-                "courseSection": course.getSectionID(),
-                "courseType": course.getType(),
-                "courseTime": course.getTime(),
-                "courseDay": course.getDays(),
-                "courseLocation": course.getLocation(),
-                "courseInstructor": course.getInstructor(),
-                "courseSubject": course.getSubject(),
-                "courseLevel": course.getLevel(),
-                "courseCredit": course.getCredit(),
-                "courseAttribute": course.getAttribute(),
-            })
-
-    
-    parsed = json.dumps(data, separators=(',', ":"))
-    f.write(parsed)
-    f.close()
-    return
-
-
-# This method is for admin. Following functions modifies output name for certain purpose
-#  append output parsed data to source
-# :param list of Course object
-# :param course term
-def integrateToText(courseLists, term):
-    
-    f = open('./data/course.txt','a', encoding='UTF-8')
-
-    for courseList in courseLists:
-
-        if courseList is None: continue
-
-        for course in courseList:
-
-            f.write(str(course))
-    
-    f.close()
-    return

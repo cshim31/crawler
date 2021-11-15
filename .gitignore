@@ -1,6 +1,8 @@
-# git ignores extensions
-# data/*.txt
-# data/*.csv
-data/*.xlsx
+# link files
 *.lnk 
+
+# cache files
 **/__pycache__/  
+
+# test files
+src/test.py
