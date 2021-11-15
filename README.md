@@ -1,11 +1,11 @@
 # GT Crawler
 
-<p/> Georgia Tech course information crawler using Python
+<p> Georgia Tech course information crawler using Python </p>
 
 ### Description
 
 <a href="https://www.telerik.com/download/fiddler-everywhere"> Fiddler Everywhere </a> is used for analyzing packet sent to Georgia Tech web server.
-<p /> Data is saved in form of ".csv" extension but feel free to edit the extension and change it on your own.
+<p> Data is saved in form of ".csv" extension but feel free to edit the extension and change it on your own. </p>
 
 ## Getting Started
 ### Building and installing
