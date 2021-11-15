@@ -3,7 +3,7 @@ import numpy as np
 import parse
 
 def task(courseTerm):
-    courseLists = [[]]
+    courseLists = []
     
     courseSubjectPair = crawl.fetchCourseSubject(courseTerm)
 
@@ -12,10 +12,11 @@ def task(courseTerm):
         for courseNum in courseNums:
             print('fetcing %s:%s' % (courseSubjectKey, courseNum))
             courseList = crawl.fetchSchedule(courseTerm, courseSubjectValue, courseSubjectKey, courseNum)
-            courseLists.append(courseList)
+            if courseList:
+                courseLists.extend(courseList)
 
     
     # write parsed data to file output in excel
     print("Writing data...")
     parse.writeCSV(courseLists, courseTerm)
-    crawl.writeJson(courseLists, courseTerm)
+    parse.writeJson(courseLists, courseTerm)
