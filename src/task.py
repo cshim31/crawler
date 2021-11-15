@@ -16,6 +16,7 @@ def task(courseTerm):
 
     
     # write parsed data to file output in excel
-    print("Writing data...")
+    print("Writing csv...")
     parse.writeCSV(courseLists, courseTerm)
-    crawl.writeJson(courseLists, courseTerm)
+    print("Writing json...")
+    parse.writeJson(courseLists, courseTerm)
