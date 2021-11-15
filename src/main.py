@@ -42,7 +42,7 @@ def run():
 
 def generateThreads():
     # fetch number of semester as defined in constant.py
-    terms = crawl.get_terms(constant.SEMESTER)
+    terms = crawl.fetchCourseTerm(constant.SEMESTER)
 
     for term in terms:
         threadList.append(Thread(target=task.task, args=(term,)))
