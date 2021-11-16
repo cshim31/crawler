@@ -1,8 +1,8 @@
 from time import gmtime, strftime, time, sleep
 from threading import Thread
 
+from constant.constant import *
 import crawl
-import constant
 import task
 
 threadList = []
@@ -42,7 +42,7 @@ def run():
 
 def generateThreads():
     # fetch number of semester as defined in constant.py
-    terms = crawl.fetchCourseTerm(constant.SEMESTER)
+    terms = crawl.fetchCourseTerm(SEMESTER)
 
     for term in terms:
         threadList.append(Thread(target=task.task, args=(term,)))
@@ -53,7 +53,6 @@ def init():
 
 def main():
     init()
-
 
     
 if __name__ == "__main__":

@@ -1,29 +1,12 @@
 import crawl
 import numpy as np
-import parse
 import time
 from threading import Thread
-import constant
 
-class Package:
-    def __init__(self, courseTerm='', courseSubjectKey='', courseSubjectValue='', courseNum=''):
-        self.courseTerm = courseTerm
-        self.courseSubjectKey = courseSubjectKey
-        self.courseSubjectValue = courseSubjectValue
-        self.courseNum = courseNum
-
-    # getters & setters
-    def getTerm(self):
-        return self.courseTerm
-
-    def getSubjectKey(self):
-        return self.courseSubjectKey
-
-    def getSubjectValue(self):
-        return self.courseSubjectValue
-
-    def getNum(self):
-        return self.courseNum
+from constant.constant import *
+import crawl
+from data.package import Package
+import parse
 
 packageList = []
 courseList = []
@@ -32,7 +15,7 @@ running = True
 def task(courseTerm):
     global running
 
-    threadList = [Thread(target=subTask, args=()) for i in range(constant.THREAD_COUNT)]
+    threadList = [Thread(target=subTask, args=()) for i in range(THREAD_COUNT)]
 
     for thread in threadList:
         thread.start()
@@ -42,11 +25,12 @@ def task(courseTerm):
     for courseSubjectKey,courseSubjectValue in courseSubjectPair.items():
         courseNums = crawl.fetchCourseNum(courseTerm, courseSubjectKey)
         for courseNum in courseNums:
-            packageList.append(Package(courseTerm, courseSubjectKey, courseSubjectValue, courseNum))
-            #print('Pakcage : %s %s' %(courseSubjectKey, courseNum))
+            package = Package(courseTerm, courseSubjectKey, courseSubjectValue, courseNum)
+            packageList.append(package)
+            #print(package)
 
     while packageList:
-        time.sleep(5)
+        time.sleep(10)
 
 
     print("Terminating threads...")
