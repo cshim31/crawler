@@ -5,8 +5,9 @@ from threading import Thread
 
 from constant import constant
 import crawl
-from data import package
+from data.package import Package
 import parse
+import thread
 
 packageList = []
 courseList = []
@@ -29,8 +30,10 @@ def task(courseTerm):
             packageList.append(package)
             #print(package)
 
-    while packageList:
-        time.sleep(10)
+    
+    while threadList:
+        thread.checkThreadStatus(threadList)
+        sleep(10)
 
 
     print("Terminating threads...")
@@ -44,11 +47,13 @@ def task(courseTerm):
 
 def subTask(): 
     while running:
-        if not packageList: continue
-
-        package = packageList.pop(0)
+        try:
+            package = packageList.pop(0)
+            schedule = crawl.fetchSchedule(package.getTerm(), package.getSubjectKey(), package.getSubjectValue(), package.getNum())
+            if schedule: courseList.extend(schedule)
+        except IndexError:
+            pass
 
         #print('fetcing %s:%s, %s' % (package.getSubjectKey(), package.getNum(), package.getTerm()))
-        schedule = crawl.fetchSchedule(package.getTerm(), package.getSubjectKey(), package.getSubjectValue(), package.getNum())
-        if schedule:
-            courseList.extend(schedule)
+            
+

@@ -4,7 +4,7 @@ import re
 import numpy as np
 
 from constant import constant
-from data import course
+from data.course import Course
 import parse
 
 # crawl the list of course terms with specified num input
@@ -113,7 +113,7 @@ def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
         ('schd_in', '%')
     ]
     
-    response = requests.get(URL, params=payload, timeout=TIMEOUT)
+    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
