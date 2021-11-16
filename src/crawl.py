@@ -174,9 +174,8 @@ def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
         ('crse_in', courseID),
         ('schd_in', '%')
     ]
-
+    
     response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
-
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -204,6 +203,8 @@ def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
         courseAttribute = attributes.pop() if len(attributes) > 0 else ''
 
         bodyInfo = tableBody.find_all('td', class_='dddefault')
+        if not bodyInfo: continue
+
         courseClass = bodyInfo[0].text.strip()
         courseTime = bodyInfo[1].text.strip()
         courseDay = bodyInfo[2].text.strip()

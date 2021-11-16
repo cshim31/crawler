@@ -1,4 +1,4 @@
 # Following page lists constant data
-SEMESTER = 1
+SEMESTER = 3
 TIMEOUT = 10
 DELAY = 0.1
