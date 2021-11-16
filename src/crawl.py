@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import re
 import numpy as np
 
-from constant.constant import *
-from data.course import Course
+from constant import constant
+from data import course
 import parse
 
 # crawl the list of course terms with specified num input
@@ -16,7 +16,7 @@ def fetchCourseTerm(num):
     URL = 'https://oscar.gatech.edu/pls/bprod/bwckctlg.p_disp_dyn_ctlg'
 
     # Instantiate a request objects to document
-    req = requests.get(URL, timeout=TIMEOUT)
+    req = requests.get(URL, timeout=constant.TIMEOUT)
     html = req.text 
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -49,7 +49,7 @@ def fetchCourseSubject(courseTerm):
         ('cat_term_in', courseTerm)
     ]
 
-    response = requests.get(URL, params=payload, timeout=TIMEOUT)
+    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
 
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
@@ -86,7 +86,7 @@ def fetchCourseNum(courseTerm, courseID):
         ('sel_to_cred', ''),
     ]
 
-    response = requests.get(URL, params=payload, timeout=TIMEOUT)
+    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
 
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')

@@ -3,9 +3,9 @@ import numpy as np
 import time
 from threading import Thread
 
-from constant.constant import *
+from constant import constant
 import crawl
-from data.package import Package
+from data import package
 import parse
 
 packageList = []
@@ -15,7 +15,7 @@ running = True
 def task(courseTerm):
     global running
 
-    threadList = [Thread(target=subTask, args=()) for i in range(THREAD_COUNT)]
+    threadList = [Thread(target=subTask, args=()) for i in range(constant.THREAD_COUNT)]
 
     for thread in threadList:
         thread.start()
