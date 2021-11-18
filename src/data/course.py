@@ -61,3 +61,35 @@ class Course:
     # string format
     def __str__(self):
         return self.getTerm() + '|' + self.getMajor() + '|' + self.getTitle() + '|' + self.getCRN() + '|' + self.getArea()  + '|' + self.getSection() + '|' + self.getClass() + '|' + self.getTime()  + '|' + self.getDay()  + '|' + self.getLocation()  + '|' + self.getInstructor()  + '|' + self.getUniversity()  + '|' + self.getCredit() + '|' + ','.join(self.getAttribute()) + '\n'
+
+class CourseSeat:
+    def __init__(self, seat, waitlistSeat):
+        self.seat = seat
+        self.waitlistSeat = waitlistSeat
+    
+    def getSeat(self):
+        return self.seat
+
+    def getWaitlistSeat(self):
+        return self.waitlistSeat
+
+    def __str__(self):
+        return f'Seat={self.getSeat()}, Waitlist={self.getWaitlistSeat()}'
+
+class Seat:
+    def __init__(self, capacity, actual, remaining):
+        self.capacity = capacity
+        self.actual = actual
+        self.remaining = remaining
+
+    def __str__(self):
+        return '('+ self.capacity + ',' + self.actual + ',' + self.remaining + ')'
+
+class WaitlistSeat:
+    def __init__(self, capacity, actual, remaining):
+        self.capacity = capacity
+        self.actual = actual
+        self.remaining = remaining
+
+    def __str__(self):
+        return '('+ self.capacity + ',' + self.actual + ',' + self.remaining + ')'

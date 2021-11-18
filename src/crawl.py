@@ -4,7 +4,7 @@ import re
 import numpy as np
 
 from constant import constant
-from data.course import Course
+from data.course import *
 import parse
 
 # crawl the list of course terms with specified num input
@@ -154,3 +154,40 @@ def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
         courseList.append(Course(courseTerm, courseSubjectText, courseTitle, courseCRN, courseArea, courseSection, courseClass, courseTime, courseDay, courseLocation, courseInstructor, courseUniversity, courseCredit, courseAttribute))
 
     return courseList
+
+def fetchCourseDetail(courseTerm, courseID):
+    URL = 'https://oscar.gatech.edu/bprod/bwckschd.p_disp_detail_sched'
+    payload = [
+        ('term_in', courseTerm),
+        ('crn_in', courseID),
+    ]
+
+    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    html = response.text
+    soup = BeautifulSoup(html, 'html.parser')
+
+    courseDetail = soup.find('table', class_='datadisplaytable') 
+    seatTable = courseDetail.find('table', class_='datadisplaytable') 
+
+    if(not seatTable):
+        return
+
+    seatTableRow = seatTable.find_all('tr')
+
+    courseSeats = seatTableRow[1].find_all('td', class_='dddefault')
+    seatCap = courseSeats[0].text
+    seatActual = courseSeats[1].text
+    seatRemaining = courseSeats[2].text
+    
+    courseWaitlistSeat = seatTableRow[2].find_all('td', class_='dddefault')
+    waitlistCap = courseWaitlistSeat[0].text
+    waitlistActual = courseWaitlistSeat[1].text
+    waitlistRemaining = courseWaitlistSeat[2].text
+
+    seat = Seat(seatCap, seatActual, seatRemaining)
+    waitlist = WaitlistSeat(waitlistCap, waitlistActual, waitlistRemaining)
+
+    courseSeat = CourseSeat(seat, waitlist)
+
+
+    return courseSeat
