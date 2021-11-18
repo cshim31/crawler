@@ -1,5 +1,4 @@
 # Following page lists constant data
-SEMESTER = 1
-THREAD_COUNT = 3
+SEMESTER = 3
+THREAD_COUNT = 5
 TIMEOUT = 10
-DELAY = 0.1
