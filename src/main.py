@@ -4,7 +4,7 @@ from threading import Thread
 from constant import constant
 import crawl
 import task
-import thread
+import thread as th
 
 threadList = []
 
@@ -12,7 +12,7 @@ def run():
     start_time = time()
     formatted_stime = gmtime()
 
-    thread.executeThreads(threadList)
+    th.executeThreads(threadList)
     
     # time report
     end_time = time()

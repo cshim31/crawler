@@ -46,7 +46,7 @@
 <p> Navigate to constant.py and change "THREAD_COUNT" value. </p>
 <p> Value represents number of thread to be generated for crawling course data for each semester</p>
 
-<strong> Overall, SEMESTER X THREAD_COUNT is the total number of thread generated </strong>
+<strong> Overall, SEMESTER X THREAD_COUNT + SEMESTER is the total number of thread generated </strong>
 
 
 ## Output

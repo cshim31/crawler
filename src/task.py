@@ -7,7 +7,7 @@ from constant import constant
 import crawl
 from data.package import CoursePackage
 import parse
-import thread
+import thread as th
 
 packageList = []
 courseList = []
@@ -32,8 +32,8 @@ def task(courseTerm):
 
     
     while threadList:
-        thread.checkThreadStatus(threadList)
-        sleep(10)
+        th.checkThreadStatus(threadList)
+        time.sleep(10)
 
 
     print("Terminating threads...")
