@@ -1,37 +1,19 @@
 from time import gmtime, strftime, time, sleep
 from threading import Thread
 
+from constant import constant
 import crawl
-import constant
 import task
+import thread as th
 
 threadList = []
-
-def executeThreads():
-    for thread in threadList:
-        thread.start()
-        print(thread.name, " executed")
 
 def run():
     start_time = time()
     formatted_stime = gmtime()
 
-    executeThreads()
+    th.executeThreads(threadList)
     
-    # run until thread completes
-    running = True
-    while running:
-        sleep(10) # check every 10s
-        # reset system variables
-        running = True
-        isAlive = True
-        if threadList:
-            isAlive = threadList[0].is_alive()            
-        for thread in threadList:
-            isAlive = not (isAlive or thread.is_alive())
-
-        running = running != isAlive # xor
-
     # time report
     end_time = time()
     formatted_etime = gmtime()
@@ -53,7 +35,6 @@ def init():
 
 def main():
     init()
-
 
     
 if __name__ == "__main__":

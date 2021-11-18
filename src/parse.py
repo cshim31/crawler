@@ -1,5 +1,6 @@
 import pandas as pd 
 import json
+
 #  append output parsed data to source
 # :param list of Course object
 # :param course term

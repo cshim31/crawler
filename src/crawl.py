@@ -1,73 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-import constant
 import numpy as np
+
+from constant import constant
+from data.course import *
 import parse
-
-class Course:
-    def __init__(self, courseTerm='', courseMajor='', courseTitle='', courseCRN='', courseArea='', courseSection='', courseClass='', courseTime='', courseDay='', courseLocation='', courseInstructor='', courseUniversity='', courseCredit='', courseAttribute=[]):
-        self.courseTerm = courseTerm
-        self.courseMajor = courseMajor
-        self.courseTitle = courseTitle
-        self.courseCRN = courseCRN
-        self.courseArea = courseArea
-        self.courseSection = courseSection
-        self.courseClass = courseClass
-        self.courseTime = courseTime
-        self.courseDay = courseDay
-        self.courseLocation = courseLocation
-        self.courseInstructor = courseInstructor
-        self.courseUniversity = courseUniversity
-        self.courseCredit = courseCredit
-        self.courseAttribute = courseAttribute
-
-    # getters & setters
-    def getTerm(self):
-        return self.courseTerm
-
-    def getMajor(self):
-        return self.courseMajor
-
-    def getTitle(self):
-        return self.courseTitle
-    
-    def getCRN(self):
-        return self.courseCRN
-
-    def getArea(self):
-        return self.courseArea
-
-    def getSection(self):
-        return self.courseSection
-
-    def getClass(self):
-        return self.courseClass    
-
-    def getTime(self):
-        return self.courseTime 
-
-    def getDay(self):
-        return self.courseDay
-
-    def getLocation(self):
-        return self.courseLocation
-
-    def getInstructor(self):
-        return self.courseInstructor
-
-    def getUniversity(self):
-        return self.courseUniversity
-    
-    def getCredit(self):
-        return self.courseCredit
-
-    def getAttribute(self):
-        return self.courseAttribute
-
-    # string format
-    def __str__(self):
-        return self.getTerm() + '|' + self.getMajor() + '|' + self.getTitle() + '|' + self.getCRN() + '|' + self.getArea()  + '|' + self.getSection() + '|' + self.getClass() + '|' + self.getTime()  + '|' + self.getDay()  + '|' + self.getLocation()  + '|' + self.getInstructor()  + '|' + self.getUniversity()  + '|' + self.getCredit() + '|' + ','.join(self.getAttribute()) + '\n'
 
 # crawl the list of course terms with specified num input
 # return most recent $(num) course terms
@@ -165,7 +103,7 @@ def fetchCourseNum(courseTerm, courseID):
 # :param course ID 
 # :param course number with 
 # :return list of course object 
-def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
+def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
     courseList = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
     payload = [
@@ -216,3 +154,40 @@ def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
         courseList.append(Course(courseTerm, courseSubjectText, courseTitle, courseCRN, courseArea, courseSection, courseClass, courseTime, courseDay, courseLocation, courseInstructor, courseUniversity, courseCredit, courseAttribute))
 
     return courseList
+
+def fetchCourseDetail(courseTerm, courseID):
+    URL = 'https://oscar.gatech.edu/bprod/bwckschd.p_disp_detail_sched'
+    payload = [
+        ('term_in', courseTerm),
+        ('crn_in', courseID),
+    ]
+
+    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    html = response.text
+    soup = BeautifulSoup(html, 'html.parser')
+
+    courseDetail = soup.find('table', class_='datadisplaytable') 
+    seatTable = courseDetail.find('table', class_='datadisplaytable') 
+
+    if(not seatTable):
+        return
+
+    seatTableRow = seatTable.find_all('tr')
+
+    courseSeats = seatTableRow[1].find_all('td', class_='dddefault')
+    seatCap = courseSeats[0].text
+    seatActual = courseSeats[1].text
+    seatRemaining = courseSeats[2].text
+    
+    courseWaitlistSeat = seatTableRow[2].find_all('td', class_='dddefault')
+    waitlistCap = courseWaitlistSeat[0].text
+    waitlistActual = courseWaitlistSeat[1].text
+    waitlistRemaining = courseWaitlistSeat[2].text
+
+    seat = Seat(seatCap, seatActual, seatRemaining)
+    waitlist = WaitlistSeat(waitlistCap, waitlistActual, waitlistRemaining)
+
+    courseSeat = CourseSeat(seat, waitlist)
+
+
+    return courseSeat
