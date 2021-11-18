@@ -1,4 +1,4 @@
-class Package:
+class CoursePackage:
     def __init__(self, courseTerm='', courseSubjectKey='', courseSubjectValue='', courseNum=''):
         self.courseTerm = courseTerm
         self.courseSubjectKey = courseSubjectKey

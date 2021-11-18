@@ -5,7 +5,7 @@ from threading import Thread
 
 from constant import constant
 import crawl
-from data.package import Package
+from data.package import CoursePackage
 import parse
 import thread
 
@@ -26,7 +26,7 @@ def task(courseTerm):
     for courseSubjectKey,courseSubjectValue in courseSubjectPair.items():
         courseNums = crawl.fetchCourseNum(courseTerm, courseSubjectKey)
         for courseNum in courseNums:
-            package = Package(courseTerm, courseSubjectKey, courseSubjectValue, courseNum)
+            package = CoursePackage(courseTerm, courseSubjectKey, courseSubjectValue, courseNum)
             packageList.append(package)
             #print(package)
 
@@ -49,7 +49,7 @@ def subTask():
     while running:
         try:
             package = packageList.pop(0)
-            schedule = crawl.fetchSchedule(package.getTerm(), package.getSubjectKey(), package.getSubjectValue(), package.getNum())
+            schedule = crawl.fetchCourseSchedule(package.getTerm(), package.getSubjectKey(), package.getSubjectValue(), package.getNum())
             if schedule: courseList.extend(schedule)
         except IndexError:
             pass

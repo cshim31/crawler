@@ -103,7 +103,7 @@ def fetchCourseNum(courseTerm, courseID):
 # :param course ID 
 # :param course number with 
 # :return list of course object 
-def fetchSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
+def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
     courseList = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
     payload = [
