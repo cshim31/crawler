@@ -11,12 +11,14 @@ import thread
 
 packageList = []
 courseList = []
+seatList = []
 running = True
 
+# main thread task
 def task(courseTerm):
     global running
 
-    threadList = [Thread(target=subTask, args=()) for i in range(constant.THREAD_COUNT)]
+    threadList = [Thread(target=subTaskOne, args=()) for i in range(constant.THREAD_COUNT)]
 
     for thread in threadList:
         thread.start()
@@ -42,18 +44,30 @@ def task(courseTerm):
     # write parsed data to file output in excel
     print("Writing csv...")
     parse.writeCSV(courseList, courseTerm)
+    parse.writeCSV(seatList, courseTerm + 'seat')
     print("Writing json...")
     parse.writeJson(courseList, courseTerm)
+    parse.writeJson(seatList, courseTerm + 'seat')
 
-def subTask(): 
+# subthread task
+def subTaskOne(): 
     while running:
-        try:
-            package = packageList.pop(0)
-            schedule = crawl.fetchCourseSchedule(package.getTerm(), package.getSubjectKey(), package.getSubjectValue(), package.getNum())
-            if schedule: courseList.extend(schedule)
-        except IndexError:
-            pass
+        if not packageList: 
+            continue
 
+        package = packageList.pop(0)
+
+        schedule = crawl.fetchCourseSchedule(package.getTerm(), package.getSubjectKey(), package.getSubjectValue(), package.getNum())
+
+        if schedule: 
+            #seats = [crawl.fetchCourseSeat(course.getTerm(), course.getCRN()) for course in schedule]
+            seats = []
+            for course in schedule:
+                print(course.getArea())
+                seats.append(crawl.fetchCourseSeat(course.getTerm(), course.getCRN()))
+
+            courseList.extend(schedule)
+            seatList.extend(seats)
         #print('fetcing %s:%s, %s' % (package.getSubjectKey(), package.getNum(), package.getTerm()))
             
 

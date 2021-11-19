@@ -11,6 +11,7 @@ import parse
 # return most recent $(num) course terms
 # :param number of course terms to be extracted
 # :return list of course terms
+
 def fetchCourseTerm(num): 
     courseTerms = []
     URL = 'https://oscar.gatech.edu/pls/bprod/bwckctlg.p_disp_dyn_ctlg'
@@ -41,6 +42,7 @@ def fetchCourseTerm(num):
 # :param course term to extract course subjects available
 # :return list of course ID with specified course term
 # :return list of course subject
+
 def fetchCourseSubject(courseTerm):
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_cat_term_date'
     
@@ -66,6 +68,7 @@ def fetchCourseSubject(courseTerm):
 # :param course term to extract course subjects available
 # :param course ID to extract course number
 # :return list of course number 
+
 def fetchCourseNum(courseTerm, courseID):
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses'
     payload = [
@@ -96,13 +99,13 @@ def fetchCourseNum(courseTerm, courseID):
 
     return courseNums
 
-
 # crawl the list of course information associated with specified course term, course subject, course ID, and course number input
 # :param course term
 # :param course subject 
 # :param course ID 
 # :param course number with 
 # :return list of course object 
+
 def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
     courseList = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
@@ -155,7 +158,7 @@ def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, cours
 
     return courseList
 
-def fetchCourseDetail(courseTerm, courseID):
+def fetchCourseSeat(courseTerm, courseID):
     URL = 'https://oscar.gatech.edu/bprod/bwckschd.p_disp_detail_sched'
     payload = [
         ('term_in', courseTerm),
@@ -165,11 +168,15 @@ def fetchCourseDetail(courseTerm, courseID):
     response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
+    print(courseTerm + ': ' + courseID)
+    courseSeat = soup.find('table', class_='datadisplaytable') 
 
-    courseDetail = soup.find('table', class_='datadisplaytable') 
-    seatTable = courseDetail.find('table', class_='datadisplaytable') 
+    if not courseSeat:
+        return
 
-    if(not seatTable):
+    seatTable = courseSeat.find('table', class_='datadisplaytable') 
+
+    if not seatTable:
         return
 
     seatTableRow = seatTable.find_all('tr')
