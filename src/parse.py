@@ -16,9 +16,9 @@ def writeJson(elemList, term):
     
     f = open('./data/'+term+'.json','w', encoding='UTF-8')
     
-    data = {"course": []}
+    data = {[]}
 
-    data["course"].extend([elem.__dict__ for elem in elemList])
+    data.extend([elem.__dict__ for elem in elemList])
 
     
     parsed = json.dumps(data, separators=(',', ":"))

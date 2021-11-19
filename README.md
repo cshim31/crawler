@@ -26,24 +26,36 @@
 
     python crawler.py
 
-## Usage
+## Configuration
 <p> Navigate to constant.py and change setting. </p>
 
 [![Constant.py](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/cshim31/crawler/blob/master/src/constant.py)
 
-### Set number of semester 
-<p> Navigate to constant.py and change SEMESTER value. </p>
-<p> Value represents recent number of recent semester to crawl data. </p>
+### SEMESTER
 
-### Change Timeout and Delay 
-<p> Navigate to constant.py and change TIMEOUT and DELAY value. </p>
+<p> Navigate to constant.py and change "SEMESTER" value. </p>
+<p> Value represents number of recent semester to crawl course data. </p>
+
+### TIMEOUT
+
+<p> Navigate to constant.py and change "TIMEOUT" value. </p>
+<p> Value represents threads timeout in second</p>
+
+### THREAD_COUNT
+
+<p> Navigate to constant.py and change "THREAD_COUNT" value. </p>
+<p> Value represents number of thread to be generated for crawling course data for each semester</p>
+
+<strong> Overall, SEMESTER X THREAD_COUNT + SEMESTER is the total number of thread generated </strong>
 
 
 ## Output
 
-parsed data will be saved as "data/term.txt". User will need to manually convert it to csv file by using excel. </p>
-* Open Microsoft Excel
-* Go to Data -> From Text/CSV
-* Navigate to parsed data text file
-* Set delimiter as '|'
-* Complete import
+<p> Fetched data will be parsed and saved in "data" branch with following file name structure </p>
+<div style="text-align: right; margin-right: 10%;"> &lt;semesterID&gt;.&lt;fileExtension&gt; </div>
+
+&nbsp;
+<p> Supported files extensions: </p>
+
+- JSON (.json)
+- Excel (.csv)

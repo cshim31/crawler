@@ -105,7 +105,6 @@ def fetchCourseNum(courseTerm, courseID):
 # :param course ID 
 # :param course number with 
 # :return list of course object 
-
 def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
     courseList = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
@@ -168,7 +167,7 @@ def fetchCourseSeat(courseTerm, courseID):
     response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
-    print(courseTerm + ': ' + courseID)
+    
     courseSeat = soup.find('table', class_='datadisplaytable') 
 
     if not courseSeat:

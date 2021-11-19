@@ -7,7 +7,7 @@ from constant import constant
 import crawl
 from data.package import CoursePackage
 import parse
-import thread
+import thread as th
 
 packageList = []
 courseList = []
@@ -18,7 +18,7 @@ running = True
 def task(courseTerm):
     global running
 
-    threadList = [Thread(target=subTaskOne, args=()) for i in range(constant.THREAD_COUNT)]
+    threadList = [Thread(target=subTask, args=()) for i in range(constant.THREAD_COUNT)]
 
     for thread in threadList:
         thread.start()
@@ -34,8 +34,8 @@ def task(courseTerm):
 
     
     while threadList:
-        thread.checkThreadStatus(threadList)
-        sleep(10)
+        th.checkThreadStatus(threadList)
+        time.sleep(10)
 
 
     print("Terminating threads...")
@@ -50,7 +50,7 @@ def task(courseTerm):
     parse.writeJson(seatList, courseTerm + 'seat')
 
 # subthread task
-def subTaskOne(): 
+def subTask(): 
     while running:
         if not packageList: 
             continue
@@ -60,13 +60,14 @@ def subTaskOne():
         schedule = crawl.fetchCourseSchedule(package.getTerm(), package.getSubjectKey(), package.getSubjectValue(), package.getNum())
 
         if schedule: 
-            #seats = [crawl.fetchCourseSeat(course.getTerm(), course.getCRN()) for course in schedule]
+            courseList.extend(schedule)
+
             seats = []
             for course in schedule:
-                print(course.getArea())
-                seats.append(crawl.fetchCourseSeat(course.getTerm(), course.getCRN()))
+                seat = crawl.fetchCourseSeat(course.getTerm(), course.getCRN())
+                if seat:
+                    seats.append(seat) 
 
-            courseList.extend(schedule)
             seatList.extend(seats)
         #print('fetcing %s:%s, %s' % (package.getSubjectKey(), package.getNum(), package.getTerm()))
             
