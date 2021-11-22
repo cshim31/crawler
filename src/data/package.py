@@ -1,22 +1,13 @@
-class CoursePackage:
-    def __init__(self, courseTerm='', courseSubjectKey='', courseSubjectValue='', courseNum=''):
-        self.courseTerm = courseTerm
-        self.courseSubjectKey = courseSubjectKey
-        self.courseSubjectValue = courseSubjectValue
-        self.courseNum = courseNum
+from . import packet
+from . import session
 
-    # getters & setters
-    def getTerm(self):
-        return self.courseTerm
+class Package:
+    def __init__(self, packet=None, session=None):
+        self.packet = packet
+        self.session = session
 
-    def getSubjectKey(self):
-        return self.courseSubjectKey
+    def getPacket(self):
+        return self.packet
 
-    def getSubjectValue(self):
-        return self.courseSubjectValue
-
-    def getNum(self):
-        return self.courseNum
-
-    def __str__(self):
-        return 'Pakcage : %s %s' %(getSubjectKey(), getNum)
+    def getSession(self):
+        return self.session

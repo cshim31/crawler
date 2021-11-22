@@ -5,11 +5,9 @@ def executeThreads(threadList):
         thread.start()
         print(thread.name, " executed")
 
-    for thread in threadList:
-        thread.join()
-        print(thread.name, " executed")
-
 def checkThreadStatus(threadList):
-    thread = threadList[-1]
-    if thread.is_alive(): threadList.pop() 
+    bisAlive = False
+    for thread_ in threadList:
+        bisAlvie = bisAlive or thread_.is_alive()
+    return bisAlive
 

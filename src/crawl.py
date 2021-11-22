@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import re
 import numpy as np
 
-from constant import constant
-from data.course import *
+from constant import config
+from data.course import Course
 import parse
 
 # crawl the list of course terms with specified num input
@@ -17,7 +17,7 @@ def fetchCourseTerm(num):
     URL = 'https://oscar.gatech.edu/pls/bprod/bwckctlg.p_disp_dyn_ctlg'
 
     # Instantiate a request objects to document
-    req = requests.get(URL, timeout=constant.TIMEOUT)
+    req = requests.get(URL, timeout=config.TIMEOUT)
     html = req.text 
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -51,7 +51,7 @@ def fetchCourseSubject(courseTerm):
         ('cat_term_in', courseTerm)
     ]
 
-    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
 
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
@@ -89,7 +89,7 @@ def fetchCourseNum(courseTerm, courseID):
         ('sel_to_cred', ''),
     ]
 
-    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
 
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
@@ -106,6 +106,7 @@ def fetchCourseNum(courseTerm, courseID):
 # :param course number with 
 # :return list of course object 
 def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
+    print('fetcing %s:%s, %s' % (courseTerm, courseSubjectText, courseID))
     courseList = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
     payload = [
@@ -115,7 +116,7 @@ def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, cours
         ('schd_in', '%')
     ]
     
-    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -164,7 +165,7 @@ def fetchCourseSeat(courseTerm, courseID):
         ('crn_in', courseID),
     ]
 
-    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
     
