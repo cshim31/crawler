@@ -21,14 +21,37 @@ def task(courseTerm):
     th.executeThreads(contentsProcess.getThreadPool())
 
     session = Session([], [])
+    
+    # request schedule
     courseSubjectPair = crawl.fetchCourseSubject(courseTerm)
-    for courseSubjectKey,courseSubjectValue in courseSubjectPair.items():
-        courseNums = crawl.fetchCourseNum(courseTerm, courseSubjectKey)
+    for courseSubjectAbbr,courseSubjectText in courseSubjectPair.items():
+        courseNums = crawl.fetchCourseNum(courseTerm, courseSubjectAbbr)
         for courseNum in courseNums:
-            packet = CoursePacket(PacketType.PK_REQ_SCHEDULE, courseTerm, courseSubjectKey, courseSubjectValue, courseNum)
+            print('requesting %s:%s, %s' % (courseSubjectAbbr, courseNum, courseTerm))
+            packet = CoursePacket(PacketType.PK_REQ_SCHEDULE, courseTerm, courseSubjectAbbr, courseSubjectText, courseNum)
             contentsProcess.putPackage(Package(packet, session))
 
+            courseCRNList = crawl.fetchCourseCRN(courseTerm, courseSubjectAbbr, courseSubjectText, courseNum)
+            if not courseCRNList:
+                print('request pass')
+                continue
+            contentsProcess.putPackage(SeatPacket(PacketType.PK_REQ_SEAT, courseTerm, courseCRN) for courseCRN in courseCRNList) 
+    '''
+    # request seat
+    for courseSubjectAbbr,courseSubjectText in courseSubjectPair.items():
+        courseNums = crawl.fetchCourseNum(courseTerm, courseSubjectAbbr)
+        for courseNum in courseNums:
+            courseCRNList = crawl.fetchCourseCRN(courseTerm, courseSubjectAbbr, courseSubjectText, courseNum)
+            if not courseCRNList:
+                print('request pass')
+                continue
+                
+            for courseCRN in courseCRNList:
+                print('requesting %s:%s' %(courseTerm, courseCRN))
+                packet = SeatPacket(PacketType.PK_REQ_SEAT, courseTerm, courseCRN) 
+                contentsProcess.putPackage(Package(packet, session))
 
+    '''
     contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_CSV, courseTerm), session))
     contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_JSON, courseTerm), session))
     contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_REQ_EXIT, courseTerm), session))

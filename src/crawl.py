@@ -4,7 +4,7 @@ import re
 import numpy as np
 
 from constant import config
-from data.course import Course
+from data.course import Course, CourseSeat, Seat, WaitlistSeat
 import parse
 
 # crawl the list of course terms with specified num input
@@ -69,7 +69,7 @@ def fetchCourseSubject(courseTerm):
 # :param course ID to extract course number
 # :return list of course number 
 
-def fetchCourseNum(courseTerm, courseID):
+def fetchCourseNum(courseTerm, courseSubjectText):
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses'
     payload = [
         ('term_in', courseTerm),
@@ -81,7 +81,7 @@ def fetchCourseNum(courseTerm, courseID):
         ('sel_divs', 'dummy'),
         ('sel_dept', 'dummy'),
         ('sel_attr', 'dummy'),
-        ('sel_subj', courseID),
+        ('sel_subj', courseSubjectText),
         ('sel_crse_strt', ''),
         ('sel_crse_end', ''),
         ('sel_title', ''),
@@ -99,20 +99,60 @@ def fetchCourseNum(courseTerm, courseID):
 
     return courseNums
 
+# crawl the list of course CRN associated with specified course term, course subject, course ID, and course number input
+# :param course term
+# :param course subject 
+# :param course ID 
+# :param course number with 
+# :return list of course object 
+def fetchCourseCRN(courseTerm, courseSubjectAbbr, courseSubjectText, courseNum):
+    courseCRNList = []
+    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
+    payload = [
+        ('term_in', courseTerm),
+        ('subj_in', courseSubjectAbbr),
+        ('crse_in', courseNum),
+        ('schd_in', '%')
+    ]
+
+    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
+    html = response.text
+    soup = BeautifulSoup(html, 'html.parser')
+
+    scheduleTableContent = soup.find('table', class_='datadisplaytable')
+    if(not scheduleTableContent.find('th', class_='ddtitle')):
+        return
+
+    scheduleTables = scheduleTableContent.prettify().split('<th class="ddtitle" scope="colgroup">')[1:]
+    
+    for scheduleTable in scheduleTables:
+        soup = BeautifulSoup(scheduleTable, 'html.parser')
+        tableHead = soup.find('a')
+        title = tableHead.text.split('-')
+
+        courseTitle = title[0].strip()
+        courseCRN = title[1].strip()
+        courseArea = title[2].strip()
+        courseSection = title[3].strip()
+
+        courseCRNList.append(courseCRN)
+
+    return courseCRNList
+
 # crawl the list of course information associated with specified course term, course subject, course ID, and course number input
 # :param course term
 # :param course subject 
 # :param course ID 
 # :param course number with 
 # :return list of course object 
-def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
-    print('fetcing %s:%s, %s' % (courseTerm, courseSubjectText, courseID))
+def fetchCourseSchedule(courseTerm, courseSubjectAbbr, courseSubjectText, courseNum):
+    #print('fetcing %s:%s, %s' % (courseTerm, courseSubjectText, courseNum))
     courseList = []
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
     payload = [
         ('term_in', courseTerm),
-        ('subj_in', courseSubjectValue),
-        ('crse_in', courseID),
+        ('subj_in', courseSubjectAbbr),
+        ('crse_in', courseNum),
         ('schd_in', '%')
     ]
     
@@ -158,11 +198,11 @@ def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, cours
 
     return courseList
 
-def fetchCourseSeat(courseTerm, courseID):
+def fetchCourseSeat(courseTerm, courseCRN):
     URL = 'https://oscar.gatech.edu/bprod/bwckschd.p_disp_detail_sched'
     payload = [
         ('term_in', courseTerm),
-        ('crn_in', courseID),
+        ('crn_in', courseCRN),
     ]
 
     response = requests.get(URL, params=payload, timeout=config.TIMEOUT)

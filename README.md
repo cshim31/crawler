@@ -27,23 +27,23 @@
     python crawler.py
 
 ## Configuration
-<p> Navigate to constant.py and change setting. </p>
+<p> Navigate to config.py and change setting. </p>
 
-[![Constant.py](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/cshim31/crawler/blob/master/src/constant.py)
+[![config.py](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/cshim31/crawler/blob/master/src/constant/config.py)
 
 ### SEMESTER
 
-<p> Navigate to constant.py and change "SEMESTER" value. </p>
+<p> Navigate to config.py and change "SEMESTER" value. </p>
 <p> Value represents number of recent semester to crawl course data. </p>
 
 ### TIMEOUT
 
-<p> Navigate to constant.py and change "TIMEOUT" value. </p>
+<p> Navigate to config.py and change "TIMEOUT" value. </p>
 <p> Value represents threads timeout in second</p>
 
 ### THREAD_COUNT
 
-<p> Navigate to constant.py and change "THREAD_COUNT" value. </p>
+<p> Navigate to config.py and change "THREAD_COUNT" value. </p>
 <p> Value represents number of thread to be generated for crawling course data for each semester</p>
 
 <strong> Overall, SEMESTER X THREAD_COUNT + SEMESTER is the total number of thread generated </strong>

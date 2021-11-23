@@ -82,8 +82,8 @@ class Seat:
         self.actual = actual
         self.remaining = remaining
 
-    def __str__(self):
-        return '('+ self.capacity + ',' + self.actual + ',' + self.remaining + ')'
+    #def __str__(self):
+    #    return '('+ self.capacity + ',' + self.actual + ',' + self.remaining + ')'
 
 class WaitlistSeat:
     def __init__(self, capacity, actual, remaining):
@@ -91,5 +91,5 @@ class WaitlistSeat:
         self.actual = actual
         self.remaining = remaining
 
-    def __str__(self):
-        return '('+ self.capacity + ',' + self.actual + ',' + self.remaining + ')'
+    #def __str__(self):
+    #    return '('+ self.capacity + ',' + self.actual + ',' + self.remaining + ')'
