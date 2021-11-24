@@ -75,7 +75,7 @@ class ContentsProcess:
 
     # packet functionalities
     def pakcet_request_schedule(self, session, packet):
-        schedule = crawl.fetchCourseSchedule(packet.getCourseTerm(), packet.getcourseSubjectAbbr(), packet.getcourseSubjectText(), packet.getCourseNum())
+        schedule = crawl.fetchCourseSchedule(packet.getCourseTerm(), packet.getcourseSubjectAbbr(), packet.getcourseSubjectText())
         if schedule: 
             session.getCourseList().extend(schedule)
         
