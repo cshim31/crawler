@@ -28,8 +28,8 @@ def task(courseTerm):
         print('requesting %s:%s' % (courseSubjectAbbr, courseTerm))
         packet = CoursePacket(PacketType.PK_REQ_SCHEDULE, courseTerm, courseSubjectAbbr, courseSubjectText)
         contentsProcess.putPackage(Package(packet, session))
+
     
-    '''
     # request seat
     courseSubjectPair = crawl.fetchCourseSubject(courseTerm)
     for courseSubjectAbbr,courseSubjectText in courseSubjectPair.items():
@@ -39,11 +39,12 @@ def task(courseTerm):
             continue
             
         for courseCRN in courseCRNList:
-            print('requesting %s:%s' %(courseTerm, courseCRN))
+            print('requesting %s:%s, %s' %(courseTerm, courseCRN, courseSubjectAbbr))
             packet = SeatPacket(PacketType.PK_REQ_SEAT, courseTerm, courseCRN) 
             contentsProcess.putPackage(Package(packet, session))
-    '''
-
+    
     contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_CSV, courseTerm), session))
     contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_JSON, courseTerm), session))
     contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_REQ_EXIT, courseTerm), session))
+
+    th.joinThreads(contentsProcess.getThreadPool())

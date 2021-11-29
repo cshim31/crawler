@@ -4,7 +4,7 @@ import re
 import numpy as np
 
 from constant import config
-from data.course import Course, CourseSeat, Seat, WaitlistSeat
+from data.course import Course, Seat
 import parse
 
 # crawl the list of course terms with specified num input
@@ -33,30 +33,14 @@ def fetchCourseTerm(num):
 # :return list of course subject
 
 def fetchCourseSubject(courseTerm):
-    URL = 'https://oscar.gatech.edu/bprod/bwckgens.p_proc_term_date'
+    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_cat_term_date'
     
     payload = [
-        ('p_calling_proc', 'bwckschd.p_disp_dyn_sched'),
-        ('p_term', courseTerm)
+        ('call_proc_in', 'bwckctlg.p_disp_dyn_ctlg'),
+        ('cat_term_in', courseTerm)
     ]
 
-    proxies = {
-        "http": "http://10.10.1.10:3128",
-        "https": "https://10.10.1.10:1080",
-    }
-
-
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36',
-        'Referer': 'https://oscar.gatech.edu/pls/bprod/bwckschd.p_disp_dyn_sched',
-        'Host': 'oscar.gatech.edu',
-        'Origin': 'https://oscar.gatech.edu',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Connection': 'keep-alive',
-
-    }
-
-    response = requests.get(URL, params=payload, proxies=proxies, headers=headers, timeout=config.TIMEOUT)
+    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
 
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
@@ -242,10 +226,6 @@ def fetchCourseSeat(courseTerm, courseCRN):
     waitlistActual = courseWaitlistSeat[1].text
     waitlistRemaining = courseWaitlistSeat[2].text
 
-    seat = Seat(seatCap, seatActual, seatRemaining)
-    waitlist = WaitlistSeat(waitlistCap, waitlistActual, waitlistRemaining)
+    seat = Seat(seatCap, seatActual, seatRemaining, waitlistCap, waitlistActual, waitlistRemaining)
 
-    courseSeat = CourseSeat(seat, waitlist)
-
-
-    return courseSeat
+    return seat

@@ -18,10 +18,10 @@ class CoursePacket(Packet):
     def getCourseTerm(self):
         return self.courseTerm
 
-    def getcourseSubjectText(self):
+    def getCourseSubjectText(self):
         return self.courseSubjectText
 
-    def getcourseSubjectAbbr(self):
+    def getCourseSubjectAbbr(self):
         return self.courseSubjectAbbr
 
 #    def __str__(self):

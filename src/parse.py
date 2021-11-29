@@ -4,21 +4,21 @@ import json
 #  append output parsed data to source
 # :param list of Course object
 # :param course term
-def writeCSV(elemList, term):
+def writeCSV(elemList, title):
     df = pd.DataFrame([elem.__dict__ for elem in elemList])
-    df.to_csv('./data/' + term + '.csv', sep=',', index=False, encoding='utf-8')
+    df.to_csv('./data/' + title + '.csv', sep=',', index=False, encoding='utf-8')
     return
 
 #  append output parsed data to source
 # :param list of Course object
 # :param course term
-def writeJson(elemList, term):
+def writeJson(elemList, title):
     
-    f = open('./data/'+term+'.json','w', encoding='UTF-8')
+    f = open('./data/' + title + '.json','w', encoding='UTF-8')
     
-    data = {"seat": []}
+    data = {"data": []}
 
-    data["seat"].extend([elem.__dict__ for elem in elemList])
+    data["data"].extend([elem.__dict__ for elem in elemList])
 
     
     parsed = json.dumps(data, separators=(',', ":"))

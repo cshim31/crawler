@@ -75,7 +75,7 @@ class ContentsProcess:
 
     # packet functionalities
     def pakcet_request_schedule(self, session, packet):
-        schedule = crawl.fetchCourseSchedule(packet.getCourseTerm(), packet.getcourseSubjectAbbr(), packet.getcourseSubjectText())
+        schedule = crawl.fetchCourseSchedule(packet.getCourseTerm(), packet.getCourseSubjectAbbr(), packet.getCourseSubjectText())
         if schedule: 
             session.getCourseList().extend(schedule)
         
@@ -89,14 +89,14 @@ class ContentsProcess:
         return
 
     def packet_write_csv(self, session, packet):
-        parse.writeCSV(session.getCourseList(), packet.getCourseTerm())
-        #parse.writeCSV(session.getSeatList(), packet.getTerm() + 'seat')
+        parse.writeCSV(session.getCourseList(), packet.getCourseTerm() + '_course')
+        parse.writeCSV(session.getSeatList(), packet.getCourseTerm() + '_seat')
 
         return 
 
     def packet_write_json(self, session, packet):
-        parse.writeJson(session.getCourseList(), packet.getCourseTerm())
-        #parse.writeJson(session.getSeatList(), packet.getTerm() + 'seat')
+        parse.writeJson(session.getCourseList(), packet.getCourseTerm() +  '_course')
+        parse.writeJson(session.getSeatList(), packet.getCourseTerm() + '_seat')
 
         return
 
