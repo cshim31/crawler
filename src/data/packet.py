@@ -8,7 +8,7 @@ class Packet:
         return self.type_
 
 class CoursePacket(Packet):
-    def __init__(self, type_=PacketType.PK_NULL, courseTerm='', courseSubjectAbbr='', courseSubjectText=''):
+    def __init__(self, type_=PacketType.PK_REQ_SCHEDULE, courseTerm='', courseSubjectAbbr='', courseSubjectText=''):
         Packet.__init__(self, type_)
         self.courseTerm = courseTerm
         self.courseSubjectAbbr = courseSubjectAbbr
@@ -24,22 +24,15 @@ class CoursePacket(Packet):
     def getCourseSubjectAbbr(self):
         return self.courseSubjectAbbr
 
-#    def __str__(self):
-#        return 'Pakcage : %s' %(self.getcourseSubjectText())
-
-
 class SeatPacket(Packet):
-    def __init__(self, type_=PacketType.PK_NULL, courseTerm='', courseCRN=''):
+    def __init__(self, type_=PacketType.PK_REQ_SEAT, courseTerm='', courseSubjectAbbr=''):
         Packet.__init__(self, type_)
         self.courseTerm = courseTerm
-        self.courseCRN = courseCRN
-
+        self.courseSubjectAbbr = courseSubjectAbbr
     # getters & setters
     def getCourseTerm(self):
         return self.courseTerm
 
-    def getCourseCRN(self):
-        return self.courseCRN
+    def getCourseSubjectAbbr(self):
+        return self.courseSubjectAbbr
 
-#    def __str__(self):
-#        return 'Pakcage : %s %s' %(self.getCourseTerm(), self.getCourseCRN)

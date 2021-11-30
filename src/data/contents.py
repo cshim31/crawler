@@ -75,6 +75,7 @@ class ContentsProcess:
 
     # packet functionalities
     def pakcet_request_schedule(self, session, packet):
+        print('Processing Schedule %s:%s' %(packet.getCourseTerm(), packet.getCourseSubjectAbbr()))
         schedule = crawl.fetchCourseSchedule(packet.getCourseTerm(), packet.getCourseSubjectAbbr(), packet.getCourseSubjectText())
         if schedule: 
             session.getCourseList().extend(schedule)
@@ -82,9 +83,16 @@ class ContentsProcess:
         return
 
     def packet_request_seat(self, session, packet):
-        seat = crawl.fetchCourseSeat(packet.getCourseTerm(), packet.getCourseCRN())
-        if seat:
-            session.getSeatList().append(seat) 
+        print('Processing Seat %s:%s' %(packet.getCourseTerm(), packet.getCourseSubjectAbbr()))
+        crnList = crawl.fetchCourseCRN(packet.getCourseTerm(), packet.getCourseSubjectAbbr())
+        if not crnList:
+            return
+
+        
+        for crn in crnList:
+            seat = crawl.fetchCourseSeat(packet.getCourseTerm(), crn)
+            if seat:
+                session.getSeatList().append(seat) 
 
         return
 
@@ -114,6 +122,6 @@ class ContentsProcess:
             print('Threads Terminated')
 
         else:
-            print('Threads failed to terminate')
+            print('TIMEOUT::Failed terinating threads')
 
         return
