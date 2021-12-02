@@ -3,44 +3,37 @@ from bs4 import BeautifulSoup
 import re
 import numpy as np
 
-from constant import constant
-from data.course import *
+from constant import config
+from data.course import Course, Seat
 import parse
 
 # crawl the list of course terms with specified num input
 # return most recent $(num) course terms
 # :param number of course terms to be extracted
 # :return list of course terms
-def fetchCourseTerm(num): 
-    courseTerms = []
-    URL = 'https://oscar.gatech.edu/pls/bprod/bwckctlg.p_disp_dyn_ctlg'
 
-    # Instantiate a request objects to document
-    req = requests.get(URL, timeout=constant.TIMEOUT)
+def fetchCourseTerm(num): 
+    URL = 'https://oscar.gatech.edu/pls/bprod/bwckschd.p_disp_dyn_sched'
+
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+
+    req = requests.get(URL, headers=headers, timeout=config.TIMEOUT)
     html = req.text 
     soup = BeautifulSoup(html, 'html.parser')
 
-    # bring option lists into list
-    lists = soup.find_all('option', value=True)
+    options = soup.find_all('option', value=True)
+    terms = [option['value'] for option in options]
+    
+    courseTerm = [term for term in terms if term and int(term) % 100 < 10]
 
-    # Iterate the list of terms and append to list
-    for list in lists:
-        valueTag = list['value']
-        month = valueTag[-2:]
-        if month[0] < '1' or month[0] == '1' and month[1] <= '2':  
-            term = valueTag
-            courseTerms.append(term)
-
-        if len(courseTerms) is num :
-            break
-  
-    return courseTerms
+    return courseTerm[:num]
 
 
 # crawl the list of course ID and subjects with specified course term input
 # :param course term to extract course subjects available
 # :return list of course ID with specified course term
 # :return list of course subject
+
 def fetchCourseSubject(courseTerm):
     URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_cat_term_date'
     
@@ -49,7 +42,9 @@ def fetchCourseSubject(courseTerm):
         ('cat_term_in', courseTerm)
     ]
 
-    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+
+    response = requests.get(URL, headers=headers, params=payload, timeout=config.TIMEOUT)
 
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
@@ -62,40 +57,67 @@ def fetchCourseSubject(courseTerm):
     return courseSubjectPair
 
 
-# crawl the list of course number associated with specified course term and course ID input
-# :param course term to extract course subjects available
-# :param course ID to extract course number
-# :return list of course number 
-def fetchCourseNum(courseTerm, courseID):
-    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_display_courses'
+# crawl the list of course CRN associated with specified course term, course subject, course ID, and course number input
+# :param course term
+# :param course subject 
+# :param course ID 
+# :param course number with 
+# :return list of course object 
+def fetchCourseCRN(courseTerm, courseSubjectAbbr):
+    courseCRNList = []
+    URL = 'https://oscar.gatech.edu/bprod/bwckschd.p_get_crse_unsec'
+    
     payload = [
         ('term_in', courseTerm),
-        ('call_proc_in', 'bwckctlg.p_disp_dyn_ctlg'),
         ('sel_subj', 'dummy'),
-        ('sel_levl', 'dummy'),
+        ('sel_day', 'dummy'),
         ('sel_schd', 'dummy'),
-        ('sel_coll', 'dummy'),
-        ('sel_divs', 'dummy'),
-        ('sel_dept', 'dummy'),
+        ('sel_insm', 'dummy'),
+        ('sel_camp', 'dummy'),
+        ('sel_levl', 'dummy'),
+        ('sel_sess', 'dummy'),
+        ('sel_instr', 'dummy'),
+        ('sel_ptrm', 'dummy'),
         ('sel_attr', 'dummy'),
-        ('sel_subj', courseID),
-        ('sel_crse_strt', ''),
-        ('sel_crse_end', ''),
+        ('sel_subj', courseSubjectAbbr),
+        ('sel_crse', ''),
         ('sel_title', ''),
         ('sel_from_cred', ''),
         ('sel_to_cred', ''),
+        ('sel_instr', '%'),
+        ('sel_attr', '%'),
+        ('begin_hh', '0'),
+        ('begin_mi', '0'),
+        ('begin_ap', 'a'),
+        ('end_hh', '0'),
+        ('end_mi', '0'),
+        ('end_ap', 'a'),
     ]
 
-    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
-
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    
+    response = requests.get(URL, headers=headers, params=payload, timeout=config.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
-    tagList = soup.find_all('td', class_='nttitle')
+    scheduleTableContent = soup.find('table', class_='datadisplaytable')
+    if(not scheduleTableContent.find('th', class_='ddtitle')):
+        return
 
-    courseNums = [tag.text.split(' ')[1] for tag in tagList]
+    scheduleTables = scheduleTableContent.prettify().split('<th class="ddtitle" scope="colgroup">')[1:]
+    
+    for scheduleTable in scheduleTables:
+        soup = BeautifulSoup(scheduleTable, 'html.parser')
+        tableHead = soup.find('a')
+        title = tableHead.text.split('-')
 
-    return courseNums
+        courseTitle = title[0].strip()
+        courseCRN = title[1].strip()
+        courseArea = title[2].strip()
+        courseSection = title[3].strip()
 
+        courseCRNList.append(courseCRN)
+
+    return courseCRNList
 
 # crawl the list of course information associated with specified course term, course subject, course ID, and course number input
 # :param course term
@@ -103,17 +125,41 @@ def fetchCourseNum(courseTerm, courseID):
 # :param course ID 
 # :param course number with 
 # :return list of course object 
-def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, courseID):
+def fetchCourseSchedule(courseTerm, courseSubjectAbbr, courseSubjectText):
+    #print('fetcing %s:%s, %s' % (courseTerm, courseSubjectText, courseNum))
     courseList = []
-    URL = 'https://oscar.gatech.edu/bprod/bwckctlg.p_disp_listcrse'
+    URL = 'https://oscar.gatech.edu/bprod/bwckschd.p_get_crse_unsec'
+    
     payload = [
         ('term_in', courseTerm),
-        ('subj_in', courseSubjectValue),
-        ('crse_in', courseID),
-        ('schd_in', '%')
+        ('sel_subj', 'dummy'),
+        ('sel_day', 'dummy'),
+        ('sel_schd', 'dummy'),
+        ('sel_insm', 'dummy'),
+        ('sel_camp', 'dummy'),
+        ('sel_levl', 'dummy'),
+        ('sel_sess', 'dummy'),
+        ('sel_instr', 'dummy'),
+        ('sel_ptrm', 'dummy'),
+        ('sel_attr', 'dummy'),
+        ('sel_subj', courseSubjectAbbr),
+        ('sel_crse', ''),
+        ('sel_title', ''),
+        ('sel_from_cred', ''),
+        ('sel_to_cred', ''),
+        ('sel_instr', '%'),
+        ('sel_attr', '%'),
+        ('begin_hh', '0'),
+        ('begin_mi', '0'),
+        ('begin_ap', 'a'),
+        ('end_hh', '0'),
+        ('end_mi', '0'),
+        ('end_ap', 'a'),
     ]
     
-    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    
+    response = requests.get(URL, headers=headers, params=payload, timeout=config.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -155,23 +201,29 @@ def fetchCourseSchedule(courseTerm, courseSubjectValue, courseSubjectText, cours
 
     return courseList
 
-def fetchCourseDetail(courseTerm, courseID):
+def fetchCourseSeat(courseTerm, courseCRN):
     URL = 'https://oscar.gatech.edu/bprod/bwckschd.p_disp_detail_sched'
     payload = [
         ('term_in', courseTerm),
-        ('crn_in', courseID),
+        ('crn_in', courseCRN),
     ]
 
-    response = requests.get(URL, params=payload, timeout=constant.TIMEOUT)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    
+    response = requests.get(URL, headers=headers, params=payload, timeout=config.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
+    
+    courseSeat = soup.find('table', class_='datadisplaytable') 
 
-    courseDetail = soup.find('table', class_='datadisplaytable') 
-    seatTable = courseDetail.find('table', class_='datadisplaytable') 
-
-    if(not seatTable):
+    if not courseSeat:
         return
 
+    seatTable = courseSeat.find('table', class_='datadisplaytable') 
+
+    if not seatTable:
+        return
+    
     seatTableRow = seatTable.find_all('tr')
 
     courseSeats = seatTableRow[1].find_all('td', class_='dddefault')
@@ -184,10 +236,6 @@ def fetchCourseDetail(courseTerm, courseID):
     waitlistActual = courseWaitlistSeat[1].text
     waitlistRemaining = courseWaitlistSeat[2].text
 
-    seat = Seat(seatCap, seatActual, seatRemaining)
-    waitlist = WaitlistSeat(waitlistCap, waitlistActual, waitlistRemaining)
-
-    courseSeat = CourseSeat(seat, waitlist)
-
-
-    return courseSeat
+    seat = Seat(courseCRN, seatCap, seatActual, seatRemaining, waitlistCap, waitlistActual, waitlistRemaining)
+    
+    return seat

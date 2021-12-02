@@ -58,38 +58,30 @@ class Course:
     def getAttribute(self):
         return self.courseAttribute
 
-    # string format
-    def __str__(self):
-        return self.getTerm() + '|' + self.getMajor() + '|' + self.getTitle() + '|' + self.getCRN() + '|' + self.getArea()  + '|' + self.getSection() + '|' + self.getClass() + '|' + self.getTime()  + '|' + self.getDay()  + '|' + self.getLocation()  + '|' + self.getInstructor()  + '|' + self.getUniversity()  + '|' + self.getCredit() + '|' + ','.join(self.getAttribute()) + '\n'
-
-class CourseSeat:
-    def __init__(self, seat, waitlistSeat):
-        self.seat = seat
-        self.waitlistSeat = waitlistSeat
-    
-    def getSeat(self):
-        return self.seat
-
-    def getWaitlistSeat(self):
-        return self.waitlistSeat
-
-    def __str__(self):
-        return f'Seat={self.getSeat()}, Waitlist={self.getWaitlistSeat()}'
-
 class Seat:
-    def __init__(self, capacity, actual, remaining):
-        self.capacity = capacity
-        self.actual = actual
-        self.remaining = remaining
+    def __init__(self, crn, seatCapacity='', seatActual='', seatRemaining='', waitlistCapacity='', waitlistActual='', waitlistRemaining=''):
+        self.crn = crn
+        self.seatCapacity = seatCapacity
+        self.seatActual = seatActual
+        self.seatRemaining = seatRemaining
+        self.waitlistCapacity = waitlistCapacity
+        self.waitlistActual = waitlistActual
+        self.waitlistRemaining = waitlistRemaining
 
-    def __str__(self):
-        return '('+ self.capacity + ',' + self.actual + ',' + self.remaining + ')'
+    def getCRN(self):
+        return self.crn
 
-class WaitlistSeat:
-    def __init__(self, capacity, actual, remaining):
-        self.capacity = capacity
-        self.actual = actual
-        self.remaining = remaining
+    def getSeatCapacity(self):
+        return self.seatCapacity
 
-    def __str__(self):
-        return '('+ self.capacity + ',' + self.actual + ',' + self.remaining + ')'
+    def getSeatActual(self):
+        return self.seatActual
+
+    def getWaitlistCapacity(self):
+        return self.waitlistCapacity
+
+    def getWaitlistActual(self):
+        return self.waitlistActual
+
+    def getWaitlistRemaining(self):
+        return self.waitlistRemaining

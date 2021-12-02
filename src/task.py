@@ -3,57 +3,40 @@ import numpy as np
 import time
 from threading import Thread
 
-from constant import constant
 import crawl
-from data.package import CoursePackage
+from constant import config
+from constant.enum_ import PacketType
+from data.contents import ContentsProcess
+from data.package import Package
+from data.packet import Packet, CoursePacket, SeatPacket
+from data.session import Session
 import parse
 import thread as th
 
-packageList = []
-courseList = []
-running = True
-
+# main thread task
 def task(courseTerm):
-    global running
+    contentsProcess = ContentsProcess()
 
-    threadList = [Thread(target=subTask, args=()) for i in range(constant.THREAD_COUNT)]
+    contentsProcess.threadPool_.extend([Thread(target=contentsProcess.process, args=()) for i in range(config.THREAD_COUNT)])
+    th.executeThreads(contentsProcess.getThreadPool())
 
-    for thread in threadList:
-        thread.start()
-        print(thread.name, " executed")
-
+    session = Session()
+    # request schedule
     courseSubjectPair = crawl.fetchCourseSubject(courseTerm)
-    for courseSubjectKey,courseSubjectValue in courseSubjectPair.items():
-        courseNums = crawl.fetchCourseNum(courseTerm, courseSubjectKey)
-        for courseNum in courseNums:
-            package = CoursePackage(courseTerm, courseSubjectKey, courseSubjectValue, courseNum)
-            packageList.append(package)
-            #print(package)
+    for courseSubjectAbbr,courseSubjectText in courseSubjectPair.items():
+        print('requesting %s:%s' % (courseSubjectAbbr, courseTerm))
+        
+        packet = CoursePacket(PacketType.PK_REQ_SCHEDULE, courseTerm, courseSubjectAbbr, courseSubjectText)
+        contentsProcess.putPackage(Package(packet, session))
 
-    
-    while threadList:
-        th.checkThreadStatus(threadList)
-        time.sleep(10)
+        packet = SeatPacket(PacketType.PK_REQ_SEAT, courseTerm, courseSubjectAbbr)
+        contentsProcess.putPackage(Package(packet, session))
 
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_COURSE_CSV, courseTerm), session))
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_COURSE_JSON, courseTerm), session))
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_SEAT_CSV, courseTerm), session))
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_SEAT_JSON, courseTerm), session))
 
-    print("Terminating threads...")
-    running = False
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_REQ_EXIT, courseTerm), session))
 
-    # write parsed data to file output in excel
-    print("Writing csv...")
-    parse.writeCSV(courseList, courseTerm)
-    print("Writing json...")
-    parse.writeJson(courseList, courseTerm)
-
-def subTask(): 
-    while running:
-        try:
-            package = packageList.pop(0)
-            schedule = crawl.fetchCourseSchedule(package.getTerm(), package.getSubjectKey(), package.getSubjectValue(), package.getNum())
-            if schedule: courseList.extend(schedule)
-        except IndexError:
-            pass
-
-        #print('fetcing %s:%s, %s' % (package.getSubjectKey(), package.getNum(), package.getTerm()))
-            
-
+    th.joinThreads(contentsProcess.getThreadPool())

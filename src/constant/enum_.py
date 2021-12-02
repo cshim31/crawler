@@ -1,0 +1,11 @@
+from enum import Enum
+
+class PacketType(Enum):
+    PK_NULL = 0
+    PK_REQ_SCHEDULE = 10000
+    PK_REQ_SEAT = 10001
+    PK_WRITE_COURSE_CSV = 50000
+    PK_WRITE_COURSE_JSON = 50001
+    PK_WRITE_SEAT_CSV = 50002
+    PK_WRITE_SEAT_JSON = 50003
+    PK_REQ_EXIT = 1
