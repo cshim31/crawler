@@ -223,7 +223,7 @@ def fetchCourseSeat(courseTerm, courseCRN):
 
     if not seatTable:
         return
-
+    
     seatTableRow = seatTable.find_all('tr')
 
     courseSeats = seatTableRow[1].find_all('td', class_='dddefault')
@@ -237,5 +237,5 @@ def fetchCourseSeat(courseTerm, courseCRN):
     waitlistRemaining = courseWaitlistSeat[2].text
 
     seat = Seat(courseCRN, seatCap, seatActual, seatRemaining, waitlistCap, waitlistActual, waitlistRemaining)
-
+    
     return seat

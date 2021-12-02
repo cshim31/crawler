@@ -59,8 +59,8 @@ class Course:
         return self.courseAttribute
 
 class Seat:
-    def __init__(self, crn='', seatCapacity='', seatActual='', seatRemaining='', waitlistCapacity='', waitlistActual='', waitlistRemaining=''):
-        self.crn = crn,
+    def __init__(self, crn, seatCapacity='', seatActual='', seatRemaining='', waitlistCapacity='', waitlistActual='', waitlistRemaining=''):
+        self.crn = crn
         self.seatCapacity = seatCapacity
         self.seatActual = seatActual
         self.seatRemaining = seatRemaining
