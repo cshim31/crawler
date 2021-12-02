@@ -15,7 +15,9 @@ import parse
 def fetchCourseTerm(num): 
     URL = 'https://oscar.gatech.edu/pls/bprod/bwckschd.p_disp_dyn_sched'
 
-    req = requests.get(URL, timeout=config.TIMEOUT)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+
+    req = requests.get(URL, headers=headers, timeout=config.TIMEOUT)
     html = req.text 
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -40,7 +42,9 @@ def fetchCourseSubject(courseTerm):
         ('cat_term_in', courseTerm)
     ]
 
-    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+
+    response = requests.get(URL, headers=headers, params=payload, timeout=config.TIMEOUT)
 
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
@@ -90,7 +94,9 @@ def fetchCourseCRN(courseTerm, courseSubjectAbbr):
         ('end_ap', 'a'),
     ]
 
-    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    
+    response = requests.get(URL, headers=headers, params=payload, timeout=config.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
     scheduleTableContent = soup.find('table', class_='datadisplaytable')
@@ -151,7 +157,9 @@ def fetchCourseSchedule(courseTerm, courseSubjectAbbr, courseSubjectText):
         ('end_ap', 'a'),
     ]
     
-    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    
+    response = requests.get(URL, headers=headers, params=payload, timeout=config.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -200,7 +208,9 @@ def fetchCourseSeat(courseTerm, courseCRN):
         ('crn_in', courseCRN),
     ]
 
-    response = requests.get(URL, params=payload, timeout=config.TIMEOUT)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    
+    response = requests.get(URL, headers=headers, params=payload, timeout=config.TIMEOUT)
     html = response.text
     soup = BeautifulSoup(html, 'html.parser')
     
@@ -226,6 +236,6 @@ def fetchCourseSeat(courseTerm, courseCRN):
     waitlistActual = courseWaitlistSeat[1].text
     waitlistRemaining = courseWaitlistSeat[2].text
 
-    seat = Seat(seatCap, seatActual, seatRemaining, waitlistCap, waitlistActual, waitlistRemaining)
+    seat = Seat(courseCRN, seatCap, seatActual, seatRemaining, waitlistCap, waitlistActual, waitlistRemaining)
 
     return seat

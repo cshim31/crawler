@@ -20,7 +20,7 @@ def task(courseTerm):
     contentsProcess.threadPool_.extend([Thread(target=contentsProcess.process, args=()) for i in range(config.THREAD_COUNT)])
     th.executeThreads(contentsProcess.getThreadPool())
 
-    session = Session([], [])
+    session = Session()
     # request schedule
     courseSubjectPair = crawl.fetchCourseSubject(courseTerm)
     for courseSubjectAbbr,courseSubjectText in courseSubjectPair.items():
@@ -32,8 +32,11 @@ def task(courseTerm):
         packet = SeatPacket(PacketType.PK_REQ_SEAT, courseTerm, courseSubjectAbbr)
         contentsProcess.putPackage(Package(packet, session))
 
-    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_CSV, courseTerm), session))
-    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_JSON, courseTerm), session))
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_COURSE_CSV, courseTerm), session))
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_COURSE_JSON, courseTerm), session))
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_SEAT_CSV, courseTerm), session))
+    contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_WRITE_SEAT_JSON, courseTerm), session))
+
     contentsProcess.putPackage(Package(CoursePacket(PacketType.PK_REQ_EXIT, courseTerm), session))
 
     th.joinThreads(contentsProcess.getThreadPool())

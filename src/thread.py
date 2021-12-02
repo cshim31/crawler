@@ -10,9 +10,11 @@ def joinThreads(threadList):
         thread.join()
         #print(thread.name, " executed")
 
-def checkThreadStatus(threadList):
+# return true if threads are not done
+# return false if threads are done
+def checkThreadDone(threadList):
     bisAlive = False
     for thread_ in threadList:
-        bisAlvie = bisAlive or thread_.is_alive()
+        bisAlvie = not (bisAlive or thread_.is_alive())
     return bisAlive
 

@@ -36,11 +36,6 @@
 <p> Navigate to config.py and change "SEMESTER" value. </p>
 <p> Value represents number of recent semester to crawl course data. </p>
 
-### TIMEOUT
-
-<p> Navigate to config.py and change "TIMEOUT" value. </p>
-<p> Value represents threads timeout in second</p>
-
 ### THREAD_COUNT
 
 <p> Navigate to config.py and change "THREAD_COUNT" value. </p>
@@ -48,6 +43,16 @@
 
 <strong> Overall, SEMESTER X THREAD_COUNT + SEMESTER is the total number of thread generated </strong>
 
+### TIMEOUT
+
+<p> Navigate to config.py and change "TIMEOUT" value. </p>
+<p> Value represents threads timeout in second</p>
+
+### LATENCY
+
+<p> Navigate to config.py and change "LATENCY" value. </p>
+<p> Value represents time in second that each threads takes to process next task that involves network. </p>
+<p> In other words, latency is delay of each thread to prevent DDoS attack </p>
 
 ## Output
 

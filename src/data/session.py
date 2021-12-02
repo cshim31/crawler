@@ -1,5 +1,5 @@
 class Session:
-    def __init__(self, courseList=None, seatList=None):
+    def __init__(self, courseList=[], seatList=[]):
         self.courseList = courseList
         self.seatList = seatList
 

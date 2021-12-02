@@ -21,7 +21,7 @@ jobs:
       - name: Crawling
         run: python3 src/main.py
 
-      - name: Upload
+      - name: Upload Course
         env: 
           db_username: ${{ secrets.DATABASE_USERNAME }}
           db_password: ${{ secrets.DATABASE_PASSWORD }}
@@ -30,7 +30,7 @@ jobs:
         run: |
           mysql app --local-infile=1 --execute "DELETE FROM COURSE" -u "$db_username" -h "$db_host" -p"$db_password"
           DIR=$"./data"
-          files=($(find $DIR -name "*.csv"))
+          files=($(find $DIR -name "*course.csv"))
           len=${#files[@]}
           for (( i=0; i<$len; i++ )); 
           do  
@@ -40,6 +40,21 @@ jobs:
             TERMINATED BY '\n' 
             IGNORE 1 ROWS" 
           done
+
+        run: |
+          mysql app --local-infile=1 --execute "DELETE FROM SEAT" -u "$db_username" -h "$db_host" -p"$db_password"
+          DIR=$"./data"
+          files=($(find $DIR -name "*seat.csv"))
+          len=${#files[@]}
+          for (( i=0; i<$len; i++ )); 
+          do  
+            mysql app --local-infile=1 -u "$db_username" -h "$db_host" -p"$db_password" -P "$db_port" --execute "LOAD DATA LOCAL INFILE '${files[$i]}' 
+            INTO TABLE SEAT FIELDS TERMINATED BY ',' 
+            ENCLOSED BY '\"' LINES 
+            TERMINATED BY '\n' 
+            IGNORE 1 ROWS" 
+          done
+
         
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
