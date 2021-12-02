@@ -41,6 +41,12 @@ jobs:
             IGNORE 1 ROWS" 
           done
 
+      - name: Upload Seat
+        env: 
+          db_username: ${{ secrets.DATABASE_USERNAME }}
+          db_password: ${{ secrets.DATABASE_PASSWORD }}
+          db_host: ${{ secrets.DATABASE_HOST }}
+          db_port: ${{ secrets.DATABASE_PORT }}    
         run: |
           mysql app --local-infile=1 --execute "DELETE FROM SEAT" -u "$db_username" -h "$db_host" -p"$db_password"
           DIR=$"./data"
