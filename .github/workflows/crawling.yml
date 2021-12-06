@@ -5,7 +5,7 @@ on:
       - master
 
   schedule:
-    - cron: '0 6 * * 0,3' # run on every 
+    - cron: '0 1 * * *' 
 
 jobs:
   build-and-deploy:

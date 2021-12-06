@@ -4,7 +4,8 @@ import re
 import numpy as np
 
 from constant import config
-from data.course import Course, Seat
+from data.course import Course
+from data.seat import Seat
 import parse
 
 # crawl the list of course terms with specified num input
@@ -236,6 +237,6 @@ def fetchCourseSeat(courseTerm, courseCRN):
     waitlistActual = courseWaitlistSeat[1].text
     waitlistRemaining = courseWaitlistSeat[2].text
 
-    seat = Seat(courseCRN, seatCap, seatActual, seatRemaining, waitlistCap, waitlistActual, waitlistRemaining)
+    seat = Seat(courseTerm, courseCRN, seatCap, seatActual, seatRemaining, waitlistCap, waitlistActual, waitlistRemaining)
     
     return seat
