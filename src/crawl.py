@@ -6,6 +6,7 @@ import numpy as np
 from constant import config
 from data.course import Course
 from data.seat import Seat
+from log import *
 import parse
 
 # crawl the list of course terms with specified num input
@@ -127,7 +128,7 @@ def fetchCourseCRN(courseTerm, courseSubjectAbbr):
 # :param course number with 
 # :return list of course object 
 def fetchCourseSchedule(courseTerm, courseSubjectAbbr, courseSubjectText):
-    #print('fetcing %s:%s, %s' % (courseTerm, courseSubjectText, courseNum))
+    #log_debug(f'fetcing {courseTerm}:{courseSubjectText}: {courseNum}')
     courseList = []
     URL = 'https://oscar.gatech.edu/bprod/bwckschd.p_get_crse_unsec'
     

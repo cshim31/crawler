@@ -5,9 +5,10 @@ import os
 from data.package import Package
 from constant.enum_ import PacketType 
 from constant import config
+from log import *
+import thread as th
 import crawl
 import parse
-import thread as th
 
 class ContentsProcess:
     def __init__(self):
@@ -20,7 +21,7 @@ class ContentsProcess:
 
     def putPackage(self, package):
         self.packageQueue_.append(package)
-       # print('put %s' %(package))
+       # log_debug(f'put {package}')
 
     def execute(self):
         if not self.packageQueue_:
@@ -80,7 +81,7 @@ class ContentsProcess:
 
     # packet functionalities
     def pakcet_request_schedule(self, session, packet):
-        print('Processing Schedule %s:%s' %(packet.getCourseTerm(), packet.getCourseSubjectAbbr()))
+        log_debug(f'Processing Schedule {packet.getCourseTerm()}:{packet.getCourseSubjectAbbr()}')
         schedule = crawl.fetchCourseSchedule(packet.getCourseTerm(), packet.getCourseSubjectAbbr(), packet.getCourseSubjectText())
         if schedule: 
             session.getCourseList().extend(schedule)
@@ -88,7 +89,7 @@ class ContentsProcess:
         return
 
     def packet_request_seat(self, session, packet):
-        print('Processing Seat %s:%s' %(packet.getCourseTerm(), packet.getCourseSubjectAbbr()))
+        log_debug(f'Processing Seat {packet.getCourseTerm()}:{packet.getCourseSubjectAbbr()}')
         crnList = crawl.fetchCourseCRN(packet.getCourseTerm(), packet.getCourseSubjectAbbr())
         if not crnList:
             return
@@ -102,21 +103,37 @@ class ContentsProcess:
         return
 
     def packet_write_seat_csv(self, session, packet):
+        if not session.getSeatList():
+            log_debug('Empty Seat:: Terminating...')
+            return
+
         parse.writeCSV(session.getSeatList(), packet.getCourseTerm() + '_seat')
 
         return 
 
     def packet_write_course_csv(self, session, packet):
+        if not session.getCourseList():
+            log_debug('Empty Course:: Terminating...')
+            return 
+
         parse.writeCSV(session.getCourseList(), packet.getCourseTerm() + '_course')
 
         return 
 
     def packet_write_seat_json(self, session, packet):
+        if not session.getSeatList():
+            log_debug('Empty Seat:: Terminating...')
+            return
+
         parse.writeJson(session.getSeatList(), packet.getCourseTerm() + '_seat')
 
         return
 
     def packet_write_course_json(self, session, packet):
+        if not session.getCourseList():
+            log_debug('Empty Course:: Terminating...')
+            return 
+
         parse.writeJson(session.getCourseList(), packet.getCourseTerm() +  '_course')
 
         return
@@ -129,16 +146,16 @@ class ContentsProcess:
             bisAlive = th.checkThreadDone(self.threadPool_)
             time.sleep(10)
             i += 1
-            print('FAILED::Retrying... %i' %(i))
+            log_debug(f'FAILED::Retrying... {i}')
 
         if not bisAlive:
             self.setRunning(False)
-            print('DONE::Process done')
-            print('Terminating...')
+            log_debug('DONE::Process done')
+            log_debug('Terminating...')
 
         else:
-            print('TIMEOUT::Failed terinating threads')
-            print('Terminating...')
+            log_error('TIMEOUT::Failed terinating threads')
+            log_debug('Terminating...')
             os._exit(os.EX_SOFTWARE)
 
 

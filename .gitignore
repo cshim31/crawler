@@ -4,5 +4,8 @@
 # cache files
 **/__pycache__/  
 
+# log files
+**/*.log
+
 # test files
 src/test.py

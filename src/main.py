@@ -1,6 +1,7 @@
 from time import gmtime, strftime, time, sleep
 from threading import Thread
 
+from log import *
 from constant import config
 import crawl
 import task
@@ -18,9 +19,9 @@ def run():
     end_time = time()
     formatted_etime = gmtime()
 
-    print(strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_stime))
-    print(strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_etime))
-    print("--- %s seconds ---" % (end_time - start_time))
+    log_info(strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_stime))
+    log_info(strftime("%a, %d %b %Y %H:%M:%S +0000", formatted_etime))
+    log_info(f"--- {end_time - start_time} seconds ---")
 
 def generateThreads():
     # fetch number of semester as defined in constant.py
