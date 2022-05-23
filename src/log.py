@@ -1,6 +1,6 @@
 import logging
 
-logging.basicConfig(filename='std.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='./data/std.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 

@@ -110,7 +110,7 @@ def fetchCourseCRN(courseTerm, courseSubjectAbbr):
     for scheduleTable in scheduleTables:
         soup = BeautifulSoup(scheduleTable, 'html.parser')
         tableHead = soup.find('a')
-        title = tableHead.text.split('-')
+        title = tableHead.text.split(' - ')
 
         courseTitle = title[0].strip()
         courseCRN = title[1].strip()
