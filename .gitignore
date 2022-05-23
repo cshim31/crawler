@@ -8,4 +8,4 @@
 **/*.log
 
 # test files
-src/test.py
+**/test.py
