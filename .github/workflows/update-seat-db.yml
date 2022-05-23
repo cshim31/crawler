@@ -1,0 +1,25 @@
+name: update-seat
+
+jobs:
+  update-seat-db:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Seat DB
+        env: 
+          db_username: ${{ secrets.DATABASE_USERNAME }}
+          db_password: ${{ secrets.DATABASE_PASSWORD }}
+          db_host: ${{ secrets.DATABASE_HOST }}
+          db_port: ${{ secrets.DATABASE_PORT }}    
+        run: |
+          mysql app_test --local-infile=1 --execute "DELETE FROM SEAT" -u "$db_username" -h "$db_host" -p"$db_password"
+          DIR=$"./data"
+          files=($(find $DIR -name "*seat.csv"))
+          len=${#files[@]}
+          for (( i=0; i<$len; i++ )); 
+          do  
+            mysql app_test --local-infile=1 -u "$db_username" -h "$db_host" -p"$db_password" -P "$db_port" --execute "LOAD DATA LOCAL INFILE '${files[$i]}' 
+            INTO TABLE SEAT FIELDS TERMINATED BY '|' 
+            ENCLOSED BY '\"' LINES 
+            TERMINATED BY '\n' 
+            IGNORE 1 ROWS" 
+          done

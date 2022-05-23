@@ -1,0 +1,8 @@
+name: crawl
+
+jobs:
+  crawl-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crawl Course Data
+        run: python3 src/main.py

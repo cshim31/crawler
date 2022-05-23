@@ -1,0 +1,11 @@
+name: deploy-data
+
+jobs:
+  deploy-data:
+    runs-on: ubuntu-latest
+    steps:       
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: test-data # The branch the action should deploy to.
+          folder: data # The folder the action should deploy.

@@ -1,0 +1,25 @@
+name: assign
+on: 
+  push:
+    branches:
+      - build-workflow-hierarchy
+
+  schedule:
+    - cron: '0 1 * * *' 
+
+concurrency: ci-${{ github.ref }}
+
+jobs:
+  call-workflow-build-install-prereqs:
+    uses: ./.github/workflows/build-install-prereqs
+
+  call-workflow-crawl-course-data:
+    uses: ./.github/workflows/update-course-db
+    secrets: inherit
+
+  call-workflow-crawl-seat-data:
+    uses: ./.github/workflows/update-seat-db
+    secrets: inherit
+
+  call-workflow-deploy-data:
+    uses: ./.github/workflows/deploy-data
