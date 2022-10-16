@@ -1,5 +1,5 @@
 urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oscar.gatech.edu:443
-urllib3.connectionpool - DEBUG - https://oscar.gatech.edu:443 "GET /pls/bprod/bwckschd.p_disp_dyn_sched HTTP/1.1" 503 16669
-root - INFO - Sat, 15 Oct 2022 03:31:19 +0000
-root - INFO - Sat, 15 Oct 2022 03:31:19 +0000
+urllib3.connectionpool - DEBUG - https://oscar.gatech.edu:443 "GET /pls/bprod/bwckschd.p_disp_dyn_sched HTTP/1.1" 503 16711
+root - INFO - Sun, 16 Oct 2022 03:38:12 +0000
+root - INFO - Sun, 16 Oct 2022 03:38:12 +0000
 root - INFO - --- 1.1682510375976562e-05 seconds ---
