@@ -4,8 +4,8 @@ on:
     branches:
       - master
 
-  schedule:
-    - cron: '* * * * *' 
+#  schedule:
+#    - cron: '0 1 * * *' 
 
 jobs:
   build-and-deploy:
